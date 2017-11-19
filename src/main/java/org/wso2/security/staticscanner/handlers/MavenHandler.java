@@ -34,12 +34,8 @@ public class MavenHandler {
         request.setPomFile(new File(pomFilePath));
         request.setBaseDirectory(new File(MainScanner.getProductPath()));
         request.setGoals(Collections.singletonList(mavenCommand));
-
         Invoker invoker = new DefaultInvoker();
-        System.out.println(System.getProperty(MVN_COMMAND_M2_HOME));
-        System.out.println(System.getenv(MVN_COMMAND_M2_HOME));
         invoker.setMavenHome(new File(System.getenv(MVN_COMMAND_M2_HOME)));
-
         InvocationResult result = invoker.execute(request);
         OptionalInt.of(result.getExitCode());
     }

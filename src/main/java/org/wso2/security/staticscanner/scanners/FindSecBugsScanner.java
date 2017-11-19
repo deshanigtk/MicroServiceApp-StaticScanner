@@ -55,7 +55,7 @@ public class FindSecBugsScanner {
     public static void startScan() {
         try {
             LOGGER.info("FindSecBugs started");
-            NotificationManager.notifyFindSecBugsStatus("running");
+            NotificationManager.notifyScanStatus("running");
 
             //Create new files as "findbugs-security-include.xml" and "findbugs-security-exclude.xml"
             File findBugsSecIncludeFile = new File(MainScanner.getProductPath() + File.separator + FINDBUGS_SECURITY_INCLUDE);
@@ -102,7 +102,7 @@ public class FindSecBugsScanner {
         } catch (IOException | ParserConfigurationException | TransformerException | MavenInvocationException | SAXException e) {
             e.printStackTrace();
             LOGGER.error(e.getMessage());
-            NotificationManager.notifyFindSecBugsStatus("failed");
+            NotificationManager.notifyScanStatus("failed");
         }
 
     }

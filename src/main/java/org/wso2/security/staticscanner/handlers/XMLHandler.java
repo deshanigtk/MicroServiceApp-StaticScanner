@@ -73,7 +73,6 @@ public class XMLHandler {
     }
 
     private static void appendFindSecBugsPlugin(Document document, Element rootElement) throws TransformerException {
-
         //Get the <plugins> element that available under <build> element
         Element pluginsElement = (Element) rootElement.getElementsByTagName(PLUGINS_ELEMENT).item(0);
 
@@ -134,11 +133,9 @@ public class XMLHandler {
         Element versionElement2 = document.createElement(VERSION_ELEMENT);
         versionElement2.appendChild(document.createTextNode(VERSION_TEXT_2));
 
-
         pluginElement2.appendChild(groupIdElement2);
         pluginElement2.appendChild(artifactIdElement2);
         pluginElement2.appendChild(versionElement2);
-
         pluginsElement2.appendChild(pluginElement2);
 
         configurationElement.appendChild(effortElement);
@@ -160,18 +157,13 @@ public class XMLHandler {
         // create the root element
         Element rootEle = document.createElement(FIND_BUGS_FILTER_ELEMENT);
         document.appendChild(rootEle);
-
     }
 
     public static void writeFindSecBugsIncludeFile(Document document) throws ParserConfigurationException {
-
         Element rootEle = document.createElement(FIND_BUGS_FILTER_ELEMENT);
-
         Element matchElement = document.createElement(MATCH_ELEMENT);
-
         Element bugElement = document.createElement(BUG_ELEMENT);
         bugElement.setAttribute(CATEGORY_ATTRIBUTE, CATEGORY_ATTRIBUTE_VALUE);
-
         matchElement.appendChild(bugElement);
         rootEle.appendChild(matchElement);
         document.appendChild(rootEle);

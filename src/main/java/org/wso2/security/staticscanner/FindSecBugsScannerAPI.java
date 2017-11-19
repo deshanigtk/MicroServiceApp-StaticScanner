@@ -1,6 +1,5 @@
 package org.wso2.security.staticscanner;
 
-import org.apache.http.HttpResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -27,15 +26,13 @@ import javax.servlet.http.HttpServletResponse;
 */
 @Controller
 @RequestMapping("staticScanner")
-public class StaticScannerAPI {
+public class FindSecBugsScannerAPI {
 
-    private final StaticScannerService staticScannerService;
-
-    //TODO:send error messages to automation manager
+    private final FindSecBugsScannerService findSecBugsScannerService;
 
     @Autowired
-    public StaticScannerAPI(StaticScannerService staticScannerService) {
-        this.staticScannerService = staticScannerService;
+    public FindSecBugsScannerAPI(FindSecBugsScannerService findSecBugsScannerService) {
+        this.findSecBugsScannerService = findSecBugsScannerService;
     }
 
     @GetMapping("isReady")
@@ -51,19 +48,16 @@ public class StaticScannerAPI {
                             @RequestParam String myContainerId,
                             @RequestParam boolean isFileUpload,
                             @RequestParam(required = false) MultipartFile zipFile,
-                            @RequestParam(required = false) String url,
-                            @RequestParam(required = false, defaultValue = "master") String branch,
-                            @RequestParam(required = false) String tag,
-                            @RequestParam boolean isFindSecBugs,
-                            @RequestParam boolean isDependencyCheck) {
-        return staticScannerService.startScan(automationManagerHost, automationManagerPort, myContainerId, isFileUpload, zipFile, url, branch, tag,
-                isFindSecBugs, isDependencyCheck);
+                            @RequestParam(required = false) String gitUrl,
+                            @RequestParam(required = false) String gitUsername,
+                            @RequestParam(required = false) String gitPassword) {
+        return findSecBugsScannerService.startScan(automationManagerHost, automationManagerPort, myContainerId, isFileUpload, zipFile, gitUrl, gitUsername, gitPassword);
     }
 
     @RequestMapping(value = "getReport", method = RequestMethod.GET, produces = "application/octet-stream")
     @ResponseBody
     public void getReport(HttpServletResponse response) {
-        staticScannerService.getReport(response);
+        findSecBugsScannerService.getReport(response);
     }
 }
 

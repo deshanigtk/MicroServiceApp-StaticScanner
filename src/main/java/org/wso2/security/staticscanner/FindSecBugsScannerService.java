@@ -26,31 +26,23 @@ import org.wso2.security.staticscanner.scanners.MainScanner;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
-import java.util.Observable;
 import java.util.Observer;
 import java.util.zip.ZipOutputStream;
 
 @Service
-public class StaticScannerService {
+public class FindSecBugsScannerService {
+    private final Logger LOGGER = LoggerFactory.getLogger(FindSecBugsScannerService.class);
 
-    private boolean isFindSecBugsSuccess;
-    private boolean isDependencyCheckSuccess;
-
-    private final Logger LOGGER = LoggerFactory.getLogger(StaticScannerService.class);
-
-
-    private boolean configureNotificationManager(String automationManagerHost, int automationManagerPort, String containerId) {
-        NotificationManager.setAutomationManagerHost(automationManagerHost);
-        NotificationManager.setAutomationManagerPort(automationManagerPort);
-        NotificationManager.setMyContainerId(containerId);
+    private boolean configureNotificationManager(String containerId, String automationManagerHost, int automationManagerPort) {
+        NotificationManager.configure(containerId, automationManagerHost, automationManagerPort);
         return NotificationManager.isConfigured();
     }
 
     public String startScan(String automationManagerHost, int automationManagerPort, String containerId, boolean isFileUpload,
-                            MultipartFile zipFile, String url, String branch, String tag, boolean isFindSecBugs, boolean isDependencyCheck) {
+                            MultipartFile zipFile, String gitUrl, String gitUsername, String gitPassword) {
 
         String zipFileName = null;
-        if (!configureNotificationManager(automationManagerHost, automationManagerPort, containerId)) {
+        if (!configureNotificationManager(containerId, automationManagerHost, automationManagerPort)) {
             return "Notification manager is not configured";
         }
         if (isFileUpload) {
@@ -68,40 +60,17 @@ public class StaticScannerService {
                 }
             }
         } else {
-            if (url == null || branch == null) {
+            if (gitUrl == null) {
                 return "Please enter a URL and branch to perform clone operation";
             }
         }
-        if (!isFindSecBugs && !isDependencyCheck) {
-            return "Please enter a scan to process";
-        }
-        if (zipFile != null) {
 
-        }
         Observer mainScannerObserver = (o, arg) -> {
-            if (isFindSecBugs) {
-                if (new File(Constants.REPORTS_FOLDER_PATH + File.separator + Constants.FIND_SEC_BUGS_REPORTS_FOLDER).exists()) {
-                    LOGGER.info("FindSecBugs scanning completed");
-                    isFindSecBugsSuccess = true;
-                    NotificationManager.notifyFindSecBugsStatus("completed");
-                    NotificationManager.notifyFindSecBugsReportReady(true);
-                } else {
-                    LOGGER.error("FindSecBugs scan failed");
-                }
-            }
-            if (isDependencyCheck) {
-                if (new File(Constants.REPORTS_FOLDER_PATH + File.separator + Constants.DEPENDENCY_CHECK_REPORTS_FOLDER).exists()) {
-                    LOGGER.info("Successfully completed Dependency Check Scan");
-                    isDependencyCheckSuccess = true;
-                    NotificationManager.notifyDependencyCheckStatus("completed");
-                    NotificationManager.notifyDependencyCheckReportReady(true);
-
-                } else {
-                    LOGGER.error("Dependency Check scan failed");
-                }
-            }
-            try {
-                if (isFindSecBugsSuccess || isDependencyCheckSuccess) {
+            if (new File(Constants.REPORTS_FOLDER_PATH + File.separator + Constants.FIND_SEC_BUGS_REPORTS_FOLDER).exists()) {
+                LOGGER.info("FindSecBugs scanning completed");
+                NotificationManager.notifyScanStatus("completed");
+                NotificationManager.notifyReportReady(true);
+                try {
                     LOGGER.info("Zipping the reports folder");
                     FileOutputStream fos = new FileOutputStream(Constants.REPORTS_FOLDER_PATH + Constants.ZIP_FILE_EXTENSION);
                     ZipOutputStream zipOut = new ZipOutputStream(fos);
@@ -113,14 +82,17 @@ public class StaticScannerService {
 
                     LOGGER.info("Report zip file ready");
                     NotificationManager.notifyReportReady(true);
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    LOGGER.error(e.getMessage());
                 }
-            } catch (IOException e) {
-                e.printStackTrace();
-                LOGGER.error(e.getMessage());
+            } else {
+                LOGGER.error("FindSecBugs scan failed");
             }
         };
 
-        MainScanner mainScanner = new MainScanner(isFileUpload, zipFileName, url, branch, tag, isFindSecBugs, isDependencyCheck);
+        MainScanner mainScanner = new MainScanner(isFileUpload, zipFileName, gitUrl, gitUsername, gitPassword);
         mainScanner.addObserver(mainScannerObserver);
         new Thread(mainScanner).start();
         return "Ok";

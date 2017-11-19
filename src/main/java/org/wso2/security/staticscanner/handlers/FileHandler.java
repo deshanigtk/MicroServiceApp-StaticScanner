@@ -34,28 +34,22 @@ public class FileHandler {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(FileHandler.class);
 
-
-    public static void findFilesAndMoveToFolder(String sourcePath, String destinationPath, String fileName){
+    public static void findFilesAndMoveToFolder(String sourcePath, String destinationPath, String fileName) {
         try {
             File dir = new File(destinationPath);
             if (dir.mkdir()) {
-
-                Files.find(Paths.get(sourcePath),
-                        Integer.MAX_VALUE,
+                Files.find(Paths.get(sourcePath), Integer.MAX_VALUE,
                         (filePath, fileAttr) -> filePath.getFileName().toString().equals(fileName)).forEach((f) -> {
 
                     File file = f.toFile();
-
                     String newFileName = file.getAbsolutePath().replace(sourcePath, Constants.NULL_STRING).replace(File.separator, Constants.UNDERSCORE);
                     File newFile = new File(destinationPath + File.separator + newFileName);
-
                     file.renameTo(newFile);
                     try {
                         FileUtils.copyFileToDirectory(newFile, dir);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-
                 });
             }
         } catch (IOException e) {
@@ -87,19 +81,15 @@ public class FileHandler {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
-    public static String extractZipFile(String zipFile) {
+    public static String extractZipFile(String zipFilePath) {
         try {
             int BUFFER = 2048;
-            File file = new File(zipFile);
-
+            File file = new File(zipFilePath);
             ZipFile zip = new ZipFile(file);
             String newPath = file.getParent();
-
             String fileName = file.getName();
-
             Enumeration zipFileEntries = zip.entries();
 
             // Process each entry
@@ -108,22 +98,19 @@ public class FileHandler {
                 ZipEntry entry = (ZipEntry) zipFileEntries.nextElement();
                 String currentEntry = entry.getName();
                 File destFile = new File(newPath, currentEntry);
-
                 File destinationParent = destFile.getParentFile();
                 // create the parent directory structure if needed
                 destinationParent.mkdirs();
 
                 if (!entry.isDirectory()) {
-                    BufferedInputStream is = new BufferedInputStream(zip
-                            .getInputStream(entry));
+                    BufferedInputStream is = new BufferedInputStream(zip.getInputStream(entry));
                     int currentByte;
                     // establish buffer for writing file
                     byte data[] = new byte[BUFFER];
 
                     // write the current file to disk
                     FileOutputStream fos = new FileOutputStream(destFile);
-                    BufferedOutputStream dest = new BufferedOutputStream(fos,
-                            BUFFER);
+                    BufferedOutputStream dest = new BufferedOutputStream(fos, BUFFER);
 
                     // read and write until last byte is encountered
                     while ((currentByte = is.read(data, 0, BUFFER)) != -1) {
@@ -133,7 +120,6 @@ public class FileHandler {
                     dest.close();
                     is.close();
                 }
-
                 if (currentEntry.endsWith(Constants.ZIP_FILE_EXTENSION)) {
                     // found a zip file, try to open
                     extractZipFile(destFile.getAbsolutePath());
@@ -150,15 +136,13 @@ public class FileHandler {
     public static boolean uploadFile(MultipartFile file, String filePath) {
         try {
             byte[] bytes = file.getBytes();
-            BufferedOutputStream stream =
-                    new BufferedOutputStream(new FileOutputStream(new File(filePath)));
+            BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File(filePath)));
             stream.write(bytes);
             stream.close();
             LOGGER.info("File successfully uploaded");
             if (new File(filePath).exists()) {
                 return true;
             }
-
         } catch (IOException e) {
             LOGGER.error("File is not uploaded" + e.toString());
         }

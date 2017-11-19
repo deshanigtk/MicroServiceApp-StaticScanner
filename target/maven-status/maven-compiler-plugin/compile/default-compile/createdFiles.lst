@@ -1,14 +1,11 @@
-org/wso2/security/staticscanner/StaticScannerAPI.class
 org/wso2/security/staticscanner/handlers/GitHandler.class
-org/wso2/security/staticscanner/scanners/DependencyCheckScanner.class
-org/wso2/security/staticscanner/StaticScannerService$1.class
 org/wso2/security/staticscanner/handlers/FileHandler.class
 org/wso2/security/staticscanner/Constants.class
 org/wso2/security/staticscanner/scanners/MainScanner.class
-org/wso2/security/staticscanner/StaticScannerService.class
+org/wso2/security/staticscanner/FindSecBugsScannerAPI.class
 org/wso2/security/staticscanner/App.class
 org/wso2/security/staticscanner/handlers/MavenHandler.class
-org/wso2/security/staticscanner/tests/StaticScannerServiceTest.class
+org/wso2/security/staticscanner/FindSecBugsScannerService.class
 org/wso2/security/staticscanner/handlers/XMLHandler.class
 org/wso2/security/staticscanner/scanners/FindSecBugsScanner.class
 org/wso2/security/staticscanner/NotificationManager.class

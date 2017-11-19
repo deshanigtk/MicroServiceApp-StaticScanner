@@ -23,6 +23,7 @@ import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -32,10 +33,7 @@ public class NotificationManager {
     private final static String NOTIFY = "automationManager/staticScanner/notify";
     private final static String FILE_EXTRACTED = NOTIFY + "/fileExtracted";
     private final static String PRODUCT_CLONED = NOTIFY + "/productCloned";
-    private final static String DEPENDENCY_CHECK_STATUS = NOTIFY + "/dependencyCheckStatus";
-    private final static String FIND_SEC_BUGS_STATUS = NOTIFY + "/findSecBugsStatus";
-    private final static String FIND_SEC_BUGS_REPORT_READY = NOTIFY + "/findSecBugsReportReady";
-    private final static String DEPENDENCY_CHECK_REPORT_READY = NOTIFY + "/dependencyCheckReportReady";
+    private final static String SCAN_STATUS = NOTIFY + "/scanStatus";
     private final static String REPORT_READY = NOTIFY + "/reportReady";
 
     private static String myContainerId;
@@ -44,16 +42,9 @@ public class NotificationManager {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(NotificationManager.class);
 
-
-    public static void setMyContainerId(String myContainerId) {
+    public static void configure(String myContainerId, String automationManagerHost, int automationManagerPort) {
         NotificationManager.myContainerId = myContainerId;
-    }
-
-    public static void setAutomationManagerHost(String automationManagerHost) {
         NotificationManager.automationManagerHost = automationManagerHost;
-    }
-
-    public static void setAutomationManagerPort(int automationManagerPort) {
         NotificationManager.automationManagerPort = automationManagerPort;
     }
 
@@ -77,16 +68,15 @@ public class NotificationManager {
         }
     }
 
-    private static void notifyScanStatus(String path, String status) {
+    public static void notifyScanStatus(String status) {
         try {
-            URI uri = (new URIBuilder()).setHost(automationManagerHost).setPort(automationManagerPort).setScheme("http").setPath(path)
+            URI uri = (new URIBuilder()).setHost(automationManagerHost).setPort(automationManagerPort).setScheme("http").setPath(SCAN_STATUS)
                     .addParameter("containerId", myContainerId)
                     .addParameter("status", status)
                     .build();
             LOGGER.info("Notifying scan status: " + uri);
             HttpClient httpClient = HttpClientBuilder.create().build();
             HttpGet get = new HttpGet(uri);
-
             HttpResponse response = httpClient.execute(get);
 
             if (response != null) {
@@ -105,24 +95,6 @@ public class NotificationManager {
 
     public static void notifyProductCloned(boolean status) {
         notifyStatus(PRODUCT_CLONED, status);
-    }
-
-    public static void notifyFindSecBugsStatus(String status) {
-        LOGGER.info("Notifying find sec bugs status: " + status);
-        notifyScanStatus(FIND_SEC_BUGS_STATUS, status);
-    }
-
-    public static void notifyDependencyCheckStatus(String status) {
-        LOGGER.info("Notifying dependency check status: " + status);
-        notifyScanStatus(DEPENDENCY_CHECK_STATUS, status);
-    }
-
-    public static void notifyFindSecBugsReportReady(boolean status) {
-        notifyStatus(FIND_SEC_BUGS_REPORT_READY, status);
-    }
-
-    public static void notifyDependencyCheckReportReady(boolean status) {
-        notifyStatus(DEPENDENCY_CHECK_REPORT_READY, status);
     }
 
     public static void notifyReportReady(boolean status) {

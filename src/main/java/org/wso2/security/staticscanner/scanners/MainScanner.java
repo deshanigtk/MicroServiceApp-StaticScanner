@@ -30,11 +30,9 @@ public class MainScanner extends Observable implements Runnable {
 
     private boolean isFileUpload;
     private String zipFileName;
-    private String url;
-    private String branch;
-    private String tag;
-    private boolean isFindSecBugs;
-    private boolean isDependencyCheck;
+    private String gitUrl;
+    private String gitUsername;
+    private String gitPassword;
 
     private static String productPath = Constants.DEFAULT_PRODUCT_PATH;
 
@@ -47,14 +45,12 @@ public class MainScanner extends Observable implements Runnable {
         notifyObservers(true);
     }
 
-    public MainScanner(boolean isFileUpload, String zipFileName, String url, String branch, String tag, boolean isFindSecBugs, boolean isDependencyCheck) {
+    public MainScanner(boolean isFileUpload, String zipFileName, String gitUrl, String gitUsername, String gitPassword) {
         this.isFileUpload = isFileUpload;
         this.zipFileName = zipFileName;
-        this.url = url;
-        this.branch = branch;
-        this.tag = tag;
-        this.isFindSecBugs = isFindSecBugs;
-        this.isDependencyCheck = isDependencyCheck;
+        this.gitUrl = gitUrl;
+        this.gitUsername = gitUsername;
+        this.gitPassword = gitPassword;
     }
 
     private void startScan() {
@@ -71,19 +67,14 @@ public class MainScanner extends Observable implements Runnable {
                 LOGGER.info("Product is successfully uploaded and extracted");
             }
         } else {
-            isProductAvailable = GitHandler.startClone(url, branch, tag);
+            isProductAvailable = GitHandler.startClone(gitUrl, gitUsername, gitPassword);
             if (isProductAvailable) {
                 LOGGER.info("Product cloned successfully");
                 NotificationManager.notifyProductCloned(true);
             }
         }
         if (isProductAvailable) {
-            if (isDependencyCheck) {
-                DependencyCheckScanner.startScan();
-            }
-            if (isFindSecBugs) {
-                FindSecBugsScanner.startScan();
-            }
+            FindSecBugsScanner.startScan();
         }
     }
 

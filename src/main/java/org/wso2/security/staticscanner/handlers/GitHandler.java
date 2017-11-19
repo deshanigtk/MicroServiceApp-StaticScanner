@@ -16,11 +16,13 @@ package org.wso2.security.staticscanner.handlers;/*
 * under the License.
 */
 
+import org.eclipse.jgit.api.CloneCommand;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.*;
 import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.lib.TextProgressMonitor;
+import org.eclipse.jgit.transport.UsernamePasswordCredentialsProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.wso2.security.staticscanner.Constants;
@@ -28,36 +30,38 @@ import org.wso2.security.staticscanner.Constants;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Collections;
 
 public class GitHandler {
 
-    private final static String GIT_REFS_HEADS_PATH = "refs/heads/";
-
     private static final Logger LOGGER = LoggerFactory.getLogger(GitHandler.class);
 
-    public static boolean startClone(String url, String branch, String tag) {
+    public static boolean startClone(String url, String username, String password) {
         Git git;
         if ((new File(Constants.DEFAULT_PRODUCT_PATH).exists()) || (new File(Constants.DEFAULT_PRODUCT_PATH).mkdir())) {
-            git = gitClone(url, branch, Constants.DEFAULT_PRODUCT_PATH);
-            if (git != null && tag != null) {
-                gitCheckout(tag, git);
-                System.out.println(hasAtLeastOneReference(git.getRepository()));
-            }return hasAtLeastOneReference(git.getRepository());
+            git = gitClone(url, username, password, Constants.DEFAULT_PRODUCT_PATH);
+            return hasAtLeastOneReference(git.getRepository());
 
         }
         return false;
     }
 
-    private static Git gitClone(String gitURL, String branch, String filePath) {
+    private static Git gitClone(String gitURL, String username, String password, String filePath) {
         try {
-            return Git.cloneRepository()
+            String branch = "master";
+            if (gitURL.contains("/tree/")) {
+                branch = gitURL.substring(gitURL.lastIndexOf("/") + 1);
+                gitURL = gitURL.substring(0, gitURL.indexOf("/tree/"));
+            }
+            CloneCommand cloneCommand = Git.cloneRepository()
                     .setProgressMonitor(new TextProgressMonitor(new PrintWriter(System.out)))
                     .setURI(gitURL)
                     .setDirectory(new File(filePath))
-                    .setBranchesToClone(Collections.singleton(GIT_REFS_HEADS_PATH + branch))
-                    .setBranch(GIT_REFS_HEADS_PATH + branch)
-                    .call();
+                    .setBranch(branch);
+
+            if (username != null && password != null) {
+                cloneCommand.setCredentialsProvider(new UsernamePasswordCredentialsProvider(username, password));
+            }
+            return cloneCommand.call();
         } catch (GitAPIException e) {
             e.printStackTrace();
             LOGGER.error(e.getMessage());
@@ -67,8 +71,9 @@ public class GitHandler {
 
     private static boolean hasAtLeastOneReference(Repository repo) {
         for (Ref ref : repo.getAllRefs().values()) {
-            if (ref.getObjectId() == null)
+            if (ref.getObjectId() == null) {
                 continue;
+            }
             return true;
         }
         return false;
@@ -91,5 +96,25 @@ public class GitHandler {
     public static Git gitOpen(String productPath) throws IOException {
         return Git.open(new File(productPath));
     }
+
+//    public static void main(String[] args) throws GitAPIException {
+//
+//        String uri = "https://github.com/yasgun/ceb_online";
+//        String branch = "master";
+//        if (uri.contains("/tree/")) {
+//            branch = uri.substring(uri.lastIndexOf("/") + 1);
+//            System.out.println(branch);
+//            uri = uri.substring(0, uri.indexOf("/tree/"));
+//            System.out.println(uri);
+//        }
+//
+//        Git.cloneRepository()
+//                .setProgressMonitor(new TextProgressMonitor(new PrintWriter(System.out)))
+//                .setURI(uri)
+//                .setBranch(branch)
+//                .setDirectory(new File("/home/deshani/Documents/NewFolderClone5"))
+//                .setCredentialsProvider(new UsernamePasswordCredentialsProvider("deshanigtk", "xxx"))
+//                .call();
+//    }
 
 }
