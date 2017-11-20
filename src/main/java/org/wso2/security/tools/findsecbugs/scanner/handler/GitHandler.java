@@ -1,4 +1,4 @@
-package org.wso2.security.tools.findsecbugs.scanner.handlers;/*
+/*
 *  Copyright (c) ${date}, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
 *
 *  WSO2 Inc. licenses this file to you under the Apache License,
@@ -15,37 +15,41 @@ package org.wso2.security.tools.findsecbugs.scanner.handlers;/*
 * specific language governing permissions and limitations
 * under the License.
 */
+package org.wso2.security.tools.findsecbugs.scanner.handler;
 
 import org.eclipse.jgit.api.CloneCommand;
 import org.eclipse.jgit.api.Git;
-import org.eclipse.jgit.api.errors.*;
+import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.lib.TextProgressMonitor;
 import org.eclipse.jgit.transport.UsernamePasswordCredentialsProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.wso2.security.tools.findsecbugs.scanner.Constants;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+/**
+ * Utility methods for Git handling
+ *
+ * @author Deshani Geethika
+ */
+@SuppressWarnings({"unused"})
 public class GitHandler {
-
     private static final Logger LOGGER = LoggerFactory.getLogger(GitHandler.class);
 
-    public static boolean startClone(String url, String username, String password) {
-        Git git;
-        if ((new File(Constants.DEFAULT_PRODUCT_PATH).exists()) || (new File(Constants.DEFAULT_PRODUCT_PATH).mkdir())) {
-            git = gitClone(url, username, password, Constants.DEFAULT_PRODUCT_PATH);
-            return hasAtLeastOneReference(git.getRepository());
-
-        }
-        return false;
-    }
-
-    private static Git gitClone(String gitURL, String username, String password, String filePath) {
+    /**
+     * Clone from GitHub and returns a {@link Git} object. If the URL is related to a private repository, GitHub account credentials should be given
+     *
+     * @param gitURL   GitHub URL to clone the product. By default master branch is cloned. If a specific branch or tag to be cloned, the specified URL for the branch or tag should be given
+     * @param username GitHub user name if the product is in a private repository
+     * @param password GitHub password if the product is in private repository
+     * @param filePath Set directory to clone the product
+     * @return {@link Git} object
+     */
+    public static Git gitClone(String gitURL, String username, String password, String filePath) {
         try {
             String branch = "master";
             if (gitURL.contains("/tree/")) {
@@ -69,7 +73,7 @@ public class GitHandler {
         return null;
     }
 
-    private static boolean hasAtLeastOneReference(Repository repo) {
+    public static boolean hasAtLeastOneReference(Repository repo) {
         for (Ref ref : repo.getAllRefs().values()) {
             if (ref.getObjectId() == null) {
                 continue;
@@ -96,25 +100,5 @@ public class GitHandler {
     public static Git gitOpen(String productPath) throws IOException {
         return Git.open(new File(productPath));
     }
-
-//    public static void main(String[] args) throws GitAPIException {
-//
-//        String uri = "https://github.com/yasgun/ceb_online";
-//        String branch = "master";
-//        if (uri.contains("/tree/")) {
-//            branch = uri.substring(uri.lastIndexOf("/") + 1);
-//            System.out.println(branch);
-//            uri = uri.substring(0, uri.indexOf("/tree/"));
-//            System.out.println(uri);
-//        }
-//
-//        Git.cloneRepository()
-//                .setProgressMonitor(new TextProgressMonitor(new PrintWriter(System.out)))
-//                .setURI(uri)
-//                .setBranch(branch)
-//                .setDirectory(new File("/home/deshani/Documents/NewFolderClone5"))
-//                .setCredentialsProvider(new UsernamePasswordCredentialsProvider("deshanigtk", "xxx"))
-//                .call();
-//    }
 
 }

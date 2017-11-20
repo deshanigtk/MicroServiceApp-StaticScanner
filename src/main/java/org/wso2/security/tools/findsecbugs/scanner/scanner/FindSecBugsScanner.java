@@ -1,4 +1,4 @@
-package org.wso2.security.tools.findsecbugs.scanner.scanners;
+package org.wso2.security.tools.findsecbugs.scanner.scanner;
 
 import org.apache.maven.shared.invoker.MavenInvocationException;
 import org.slf4j.Logger;
@@ -6,9 +6,9 @@ import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.wso2.security.tools.findsecbugs.scanner.Constants;
 import org.wso2.security.tools.findsecbugs.scanner.NotificationManager;
-import org.wso2.security.tools.findsecbugs.scanner.handlers.MavenHandler;
-import org.wso2.security.tools.findsecbugs.scanner.handlers.XMLHandler;
-import org.wso2.security.tools.findsecbugs.scanner.handlers.FileHandler;
+import org.wso2.security.tools.findsecbugs.scanner.handler.MavenHandler;
+import org.wso2.security.tools.findsecbugs.scanner.handler.XMLHandler;
+import org.wso2.security.tools.findsecbugs.scanner.handler.FileHandler;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -97,7 +97,7 @@ public class FindSecBugsScanner {
             if (new File(Constants.REPORTS_FOLDER_PATH).exists() || new File(Constants.REPORTS_FOLDER_PATH).mkdir()) {
 
                 String reportsFolderPath = Constants.REPORTS_FOLDER_PATH + File.separator + Constants.FIND_SEC_BUGS_REPORTS_FOLDER;
-                FileHandler.findFilesAndMoveToFolder(MainScanner.getProductPath(), reportsFolderPath, FIND_BUGS_REPORT);
+                FileHandler.findFilesRenameAndMoveToFolder(MainScanner.getProductPath(), reportsFolderPath, FIND_BUGS_REPORT);
             }
         } catch (IOException | ParserConfigurationException | TransformerException | MavenInvocationException | SAXException e) {
             e.printStackTrace();

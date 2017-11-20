@@ -1,4 +1,4 @@
-package org.wso2.security.tools.findsecbugs.scanner.handlers;
+package org.wso2.security.tools.findsecbugs.scanner.handler;
 
 import org.w3c.dom.*;
 import javax.xml.parsers.ParserConfigurationException;

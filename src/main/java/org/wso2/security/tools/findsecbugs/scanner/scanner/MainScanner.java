@@ -1,4 +1,4 @@
-package org.wso2.security.tools.findsecbugs.scanner.scanners;/*
+package org.wso2.security.tools.findsecbugs.scanner.scanner;/*
 *  Copyright (c) ${date}, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
 *
 *  WSO2 Inc. licenses this file to you under the Apache License,
@@ -16,12 +16,13 @@ package org.wso2.security.tools.findsecbugs.scanner.scanners;/*
 * under the License.
 */
 
+import org.eclipse.jgit.api.Git;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.wso2.security.tools.findsecbugs.scanner.Constants;
 import org.wso2.security.tools.findsecbugs.scanner.NotificationManager;
-import org.wso2.security.tools.findsecbugs.scanner.handlers.FileHandler;
-import org.wso2.security.tools.findsecbugs.scanner.handlers.GitHandler;
+import org.wso2.security.tools.findsecbugs.scanner.handler.FileHandler;
+import org.wso2.security.tools.findsecbugs.scanner.handler.GitHandler;
 
 import java.io.File;
 import java.util.Observable;
@@ -67,7 +68,14 @@ public class MainScanner extends Observable implements Runnable {
                 LOGGER.info("Product is successfully uploaded and extracted");
             }
         } else {
-            isProductAvailable = GitHandler.startClone(gitUrl, gitUsername, gitPassword);
+            File productFile = new File(Constants.DEFAULT_PRODUCT_PATH);
+            Git git;
+            if (productFile.exists() || productFile.mkdir()) {
+                git = GitHandler.gitClone(gitUrl, gitUsername, gitPassword, Constants.DEFAULT_PRODUCT_PATH);
+                if (git != null) {
+                    isProductAvailable = GitHandler.hasAtLeastOneReference(git.getRepository());
+                }
+            }
             if (isProductAvailable) {
                 LOGGER.info("Product cloned successfully");
                 NotificationManager.notifyProductCloned(true);

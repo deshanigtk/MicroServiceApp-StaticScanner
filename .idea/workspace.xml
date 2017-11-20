@@ -2,22 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="40f81c15-5b53-4a0c-b769-503e6b234624" name="Default" comment="">
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/org/wso2/security/staticscanner/App.java" afterPath="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/App.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/org/wso2/security/staticscanner/Constants.java" afterPath="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/Constants.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/org/wso2/security/staticscanner/FindSecBugsScannerAPI.java" afterPath="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/FindSecBugsScannerAPI.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/org/wso2/security/staticscanner/FindSecBugsScannerService.java" afterPath="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/FindSecBugsScannerService.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/org/wso2/security/staticscanner/NotificationManager.java" afterPath="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/NotificationManager.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/org/wso2/security/staticscanner/handlers/FileHandler.java" afterPath="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/handlers/FileHandler.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/org/wso2/security/staticscanner/handlers/GitHandler.java" afterPath="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/handlers/GitHandler.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/org/wso2/security/staticscanner/handlers/MavenHandler.java" afterPath="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/handlers/MavenHandler.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/org/wso2/security/staticscanner/handlers/XMLHandler.java" afterPath="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/handlers/XMLHandler.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/org/wso2/security/staticscanner/scanners/FindSecBugsScanner.java" afterPath="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/scanners/FindSecBugsScanner.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/org/wso2/security/staticscanner/scanners/MainScanner.java" afterPath="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/scanners/MainScanner.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/codeStyleSettings.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/exception/FindSecBugsScannerRuntimeException.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/FindSecBugsScannerAPI.java" afterPath="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/controller/FindSecBugsScannerController.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/FindSecBugsScannerService.java" afterPath="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/service/FindSecBugsScannerService.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/handlers/FileHandler.java" afterPath="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/handler/FileHandler.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/handlers/GitHandler.java" afterPath="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/handler/GitHandler.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/handlers/MavenHandler.java" afterPath="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/handler/MavenHandler.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/handlers/XMLHandler.java" afterPath="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/handler/XMLHandler.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/scanners/FindSecBugsScanner.java" afterPath="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/scanner/FindSecBugsScanner.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/scanners/MainScanner.java" afterPath="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/scanner/MainScanner.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" afterPath="$PROJECT_DIR$/target/maven-archiver/pom.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -44,47 +39,40 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="NotificationManager.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/NotificationManager.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="522">
-              <caret line="39" column="44" lean-forward="false" selection-start-line="39" selection-start-column="44" selection-end-line="39" selection-end-column="44" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="App.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/App.java">
+      <file leaf-file-name="FindSecBugsScannerRuntimeException.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/exception/FindSecBugsScannerRuntimeException.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="414">
-              <caret line="24" column="13" lean-forward="false" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
-              <folding />
+              <caret line="42" column="5" lean-forward="true" selection-start-line="42" selection-start-column="5" selection-end-line="42" selection-end-column="5" />
+              <folding>
+                <element signature="e#0#1706#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FindSecBugsScannerAPI.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/FindSecBugsScannerAPI.java">
+      <file leaf-file-name="FindSecBugsScannerController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/controller/FindSecBugsScannerController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="291">
-              <caret line="27" column="22" lean-forward="false" selection-start-line="27" selection-start-column="22" selection-end-line="27" selection-end-column="22" />
+            <state relative-caret-position="216">
+              <caret line="62" column="37" lean-forward="false" selection-start-line="62" selection-start-column="0" selection-end-line="63" selection-end-column="0" />
               <folding>
+                <element signature="e#0#4125#0" expanded="true" />
                 <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GitHandler.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/handlers/GitHandler.java">
+      <file leaf-file-name="GitHandler.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/handler/GitHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1008">
-              <caret line="69" column="5" lean-forward="false" selection-start-line="69" selection-start-column="5" selection-end-line="69" selection-end-column="5" />
+            <state relative-caret-position="-97">
+              <caret line="42" column="7" lean-forward="true" selection-start-line="42" selection-start-column="7" selection-end-line="42" selection-end-column="7" />
               <folding>
+                <element signature="e#0#3823#0" expanded="true" />
                 <element signature="imports" expanded="true" />
+                <element signature="e#1259#1288#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -93,39 +81,27 @@
       <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="631">
-              <caret line="86" column="32" lean-forward="false" selection-start-line="86" selection-start-column="32" selection-end-line="86" selection-end-column="32" />
+            <state relative-caret-position="403">
+              <caret line="83" column="31" lean-forward="true" selection-start-line="83" selection-start-column="31" selection-end-line="83" selection-end-column="31" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Constants.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/Constants.java">
+      <file leaf-file-name="FindSecBugsScannerService.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/service/FindSecBugsScannerService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="558">
-              <caret line="31" column="67" lean-forward="false" selection-start-line="31" selection-start-column="67" selection-end-line="31" selection-end-column="67" />
+            <state relative-caret-position="902">
+              <caret line="81" column="94" lean-forward="false" selection-start-line="81" selection-start-column="94" selection-end-line="81" selection-end-column="94" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FileHandler.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/handlers/FileHandler.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="612">
-              <caret line="44" column="21" lean-forward="false" selection-start-line="44" selection-start-column="21" selection-end-line="44" selection-end-column="21" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="FindSecBugsScanner.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/scanners/FindSecBugsScanner.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/scanner/FindSecBugsScanner.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1440">
+            <state relative-caret-position="439">
               <caret line="100" column="13" lean-forward="false" selection-start-line="100" selection-start-column="13" selection-end-line="100" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -134,20 +110,43 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="XMLHandler.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/handlers/XMLHandler.java">
+      <file leaf-file-name="MainScanner.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/scanner/MainScanner.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1116">
-              <caret line="64" column="23" lean-forward="false" selection-start-line="64" selection-start-column="23" selection-end-line="64" selection-end-column="23" />
+            <state relative-caret-position="1105">
+              <caret line="84" column="43" lean-forward="true" selection-start-line="84" selection-start-column="43" selection-end-line="84" selection-end-column="43" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FileHandler.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/handler/FileHandler.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1368">
+              <caret line="76" column="29" lean-forward="true" selection-start-line="76" selection-start-column="29" selection-end-line="76" selection-end-column="29" />
+              <folding>
+                <element signature="e#0#7600#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="XMLHandler.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/handler/XMLHandler.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1973">
+              <caret line="31" column="38" lean-forward="false" selection-start-line="31" selection-start-column="38" selection-end-line="31" selection-end-column="38" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="MavenHandler.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/handlers/MavenHandler.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/handler/MavenHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="576">
+            <state relative-caret-position="457">
               <caret line="37" column="75" lean-forward="false" selection-start-line="37" selection-start-column="75" selection-end-line="37" selection-end-column="75" />
               <folding />
             </state>
@@ -174,14 +173,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/com/deshani/MainController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/deshani/UserAPI.java" />
-        <option value="$PROJECT_DIR$/src/main/java/org/wso2/security/Constant.java" />
-        <option value="$PROJECT_DIR$/src/main/java/org/wso2/security/FileUtil.java" />
-        <option value="$PROJECT_DIR$/src/main/java/org/wso2/security/utils/FileUtil.java" />
-        <option value="$PROJECT_DIR$/src/main/java/org/wso2/security/utils/MavenUtil.java" />
-        <option value="$PROJECT_DIR$/src/main/java/org/wso2/security/XMLHandler.java" />
-        <option value="$PROJECT_DIR$/src/main/java/org/wso2/security/utils/XMLHandler.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/wso2/security/handlers/GitClient.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/wso2/security/handlers/XMLHandler.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/wso2/security/App.java" />
@@ -225,6 +216,14 @@
         <option value="$PROJECT_DIR$/src/main/java/org/wso2/security/staticscanner/Constants.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/FindSecBugsScannerAPI.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/exception/AutomationManagerRuntimeException.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/controller/FindSecBugsScannerAPI.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/controller/FindSecBugsScannerController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/exception/FindSecBugsScannerRuntimeException.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/service/FindSecBugsScannerService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/handler/FileHandler.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/scanner/MainScanner.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/handler/GitHandler.java" />
       </list>
     </option>
   </component>
@@ -242,10 +241,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="65" />
-    <option name="y" value="24" />
-    <option name="width" value="1853" />
-    <option name="height" value="1048" />
+    <option name="x" value="140" />
+    <option name="y" value="194" />
+    <option name="width" value="1305" />
+    <option name="height" value="678" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -274,6 +273,8 @@
           <select />
         </subPane>
       </pane>
+      <pane id="AndroidView" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -314,7 +315,43 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="scanner" type="462c0819:PsiDirectoryNode" />
-              <item name="handlers" type="462c0819:PsiDirectoryNode" />
+              <item name="controller" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MicroServiceApp-StaticScanner-FSB" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MicroServiceApp-StaticScanner-FSB" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="scanner" type="462c0819:PsiDirectoryNode" />
+              <item name="exception" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MicroServiceApp-StaticScanner-FSB" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MicroServiceApp-StaticScanner-FSB" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="scanner" type="462c0819:PsiDirectoryNode" />
+              <item name="handler" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MicroServiceApp-StaticScanner-FSB" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MicroServiceApp-StaticScanner-FSB" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="scanner" type="462c0819:PsiDirectoryNode" />
+              <item name="scanner" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MicroServiceApp-StaticScanner-FSB" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MicroServiceApp-StaticScanner-FSB" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="scanner" type="462c0819:PsiDirectoryNode" />
+              <item name="service" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="MicroServiceApp-StaticScanner-FSB" type="b2602c69:ProjectViewProjectNode" />
@@ -327,8 +364,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="AndroidView" />
-      <pane id="Scope" />
       <pane id="PackagesPane" />
     </panes>
   </component>
@@ -336,32 +371,33 @@
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$2/Languages" value="XML&#10;TEXT&#10;JSON" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../MicroServiceApp-StaticScanner-DC" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/wso2-codestyle.xml" />
     <property name="RequestMappingsPanelWidth0" value="75" />
     <property name="RequestMappingsPanelOrder0" value="0" />
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="RequestMappingsPanelOrder1" value="1" />
     <property name="RequestMappingsPanelWidth2" value="75" />
     <property name="RequestMappingsPanelOrder2" value="2" />
-    <property name="settings.editor.selected.configurable" value="coverage" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="org.wso2.security.tools.findsecbugs.scanner.exception" />
+      <recent name="org.wso2.security.staticscanner.handlers" />
+      <recent name="org.wso2.security.staticscanner.config" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main" />
       <recent name="$PROJECT_DIR$/src/main/resources" />
       <recent name="$PROJECT_DIR$/src/main/resources/com.deshani" />
       <recent name="$PROJECT_DIR$/src/main/java/com/deshani" />
       <recent name="$PROJECT_DIR$/src/main/resources/com/deshani" />
-    </key>
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="org.wso2.security.staticscanner.handlers" />
-      <recent name="org.wso2.security.staticscanner.config" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/main/resources" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -858,7 +894,9 @@
       <workItem from="1511117850447" duration="58000" />
       <workItem from="1511117999816" duration="2826000" />
       <workItem from="1511158508709" duration="1245000" />
-      <workItem from="1511160461646" duration="230000" />
+      <workItem from="1511160461646" duration="1472000" />
+      <workItem from="1511172182123" duration="61000" />
+      <workItem from="1511195004736" duration="8466000" />
     </task>
     <task id="LOCAL-00001" summary="removing git comment">
       <created>1501778924100</created>
@@ -1133,7 +1171,14 @@
       <option name="project" value="LOCAL" />
       <updated>1511120798077</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="Changes folder structure">
+      <created>1511160710747</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1511160710747</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1169,7 +1214,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="291820000" />
+    <option name="totallyTimeSpent" value="301589000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1195,10 +1240,11 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32903227" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34731182" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22903226" sideWeight="0.49811321" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="CheckStyle" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23978494" sideWeight="0.49811321" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18352681" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18850194" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32946378" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32946378" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1258,7 +1304,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="include findSecBugs files into resources" />
     <MESSAGE value="resources workinnnnnnnnnnggg!!! :-)" />
     <MESSAGE value="second" />
     <MESSAGE value="after reverting" />
@@ -1283,7 +1328,8 @@
     <MESSAGE value="Http request handler class removed" />
     <MESSAGE value="fixed issue in creating full report" />
     <MESSAGE value="Removed dependency check related codes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Removed dependency check related codes" />
+    <MESSAGE value="Changes folder structure" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changes folder structure" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1299,14 +1345,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/handlers/GitHandler.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/FindSecBugsScannerAPI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="440">
-          <caret line="32" column="5" lean-forward="true" selection-start-line="32" selection-start-column="5" selection-end-line="32" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="580">
@@ -1315,7 +1353,7 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Microservice/HttpClientAPI.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/handlers/MavenHandler.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/handler/MavenHandler.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="360">
           <caret line="22" column="0" lean-forward="true" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
@@ -1331,7 +1369,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/handlers/GitHandler.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/Microservice/HttpClientAPI.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/FindSecBugsScannerAPI.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/controller/FindSecBugsScannerController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="460">
           <caret line="32" column="0" lean-forward="true" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
@@ -1352,7 +1390,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/FindSecBugsScannerAPI.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/controller/FindSecBugsScannerController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="560">
           <caret line="38" column="47" lean-forward="true" selection-start-line="38" selection-start-column="47" selection-end-line="38" selection-end-column="47" />
@@ -1449,42 +1487,12 @@
         <state relative-caret-position="396">
           <caret line="34" column="13" lean-forward="false" selection-start-line="34" selection-start-column="13" selection-end-line="34" selection-end-column="13" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/staticscanner/scanners/DependencyCheckScanner.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/FindSecBugsScannerService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="486">
-          <caret line="38" column="5" lean-forward="false" selection-start-line="38" selection-start-column="5" selection-end-line="38" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/scanners/MainScanner.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1188">
-          <caret line="74" column="9" lean-forward="false" selection-start-line="74" selection-start-column="9" selection-end-line="74" selection-end-column="9" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/NotificationManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="522">
-          <caret line="39" column="44" lean-forward="false" selection-start-line="39" selection-start-column="44" selection-end-line="39" selection-end-column="44" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/App.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="414">
@@ -1501,9 +1509,91 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/scanners/FindSecBugsScanner.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/NotificationManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1440">
+        <state relative-caret-position="1339">
+          <caret line="98" column="0" lean-forward="false" selection-start-line="98" selection-start-column="0" selection-end-line="98" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/lib/jvm/java-8-oracle/src.zip!/java/lang/RuntimeException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="64">
+          <caret line="64" column="3" lean-forward="true" selection-start-line="64" selection-start-column="3" selection-end-line="66" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/service/FindSecBugsScannerService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="902">
+          <caret line="81" column="94" lean-forward="false" selection-start-line="81" selection-start-column="94" selection-end-line="81" selection-end-column="94" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="403">
+          <caret line="83" column="31" lean-forward="true" selection-start-line="83" selection-start-column="31" selection-end-line="83" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/exception/FindSecBugsScannerRuntimeException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="414">
+          <caret line="42" column="5" lean-forward="true" selection-start-line="42" selection-start-column="5" selection-end-line="42" selection-end-column="5" />
+          <folding>
+            <element signature="e#0#1706#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/controller/FindSecBugsScannerController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="62" column="37" lean-forward="false" selection-start-line="62" selection-start-column="0" selection-end-line="63" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#4125#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/handler/FileHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1368">
+          <caret line="76" column="29" lean-forward="true" selection-start-line="76" selection-start-column="29" selection-end-line="76" selection-end-column="29" />
+          <folding>
+            <element signature="e#0#7600#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/handler/MavenHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="457">
+          <caret line="37" column="75" lean-forward="false" selection-start-line="37" selection-start-column="75" selection-end-line="37" selection-end-column="75" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/handler/XMLHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1973">
+          <caret line="31" column="38" lean-forward="false" selection-start-line="31" selection-start-column="38" selection-end-line="31" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/scanner/FindSecBugsScanner.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="439">
           <caret line="100" column="13" lean-forward="false" selection-start-line="100" selection-start-column="13" selection-end-line="100" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -1511,56 +1601,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/handlers/XMLHandler.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/scanner/MainScanner.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1116">
-          <caret line="64" column="23" lean-forward="false" selection-start-line="64" selection-start-column="23" selection-end-line="64" selection-end-column="23" />
+        <state relative-caret-position="1105">
+          <caret line="84" column="43" lean-forward="true" selection-start-line="84" selection-start-column="43" selection-end-line="84" selection-end-column="43" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/handlers/MavenHandler.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/handler/GitHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="576">
-          <caret line="37" column="75" lean-forward="false" selection-start-line="37" selection-start-column="75" selection-end-line="37" selection-end-column="75" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/handlers/FileHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="612">
-          <caret line="44" column="21" lean-forward="false" selection-start-line="44" selection-start-column="21" selection-end-line="44" selection-end-column="21" />
+        <state relative-caret-position="-97">
+          <caret line="42" column="7" lean-forward="true" selection-start-line="42" selection-start-column="7" selection-end-line="42" selection-end-column="7" />
           <folding>
+            <element signature="e#0#3823#0" expanded="true" />
             <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/handlers/GitHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1008">
-          <caret line="69" column="5" lean-forward="false" selection-start-line="69" selection-start-column="5" selection-end-line="69" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="631">
-          <caret line="86" column="32" lean-forward="false" selection-start-line="86" selection-start-column="32" selection-end-line="86" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/FindSecBugsScannerAPI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="291">
-          <caret line="27" column="22" lean-forward="false" selection-start-line="27" selection-start-column="22" selection-end-line="27" selection-end-column="22" />
-          <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#1259#1288#0" expanded="true" />
           </folding>
         </state>
       </provider>

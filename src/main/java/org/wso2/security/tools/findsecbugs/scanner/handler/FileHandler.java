@@ -1,18 +1,3 @@
-package org.wso2.security.tools.findsecbugs.scanner.handlers;
-
-
-import org.codehaus.plexus.util.FileUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.web.multipart.MultipartFile;
-import org.wso2.security.tools.findsecbugs.scanner.Constants;
-
-import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.Enumeration;
-import java.util.zip.*;
-
 /*
 *  Copyright (c) ${date}, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
 *
@@ -30,11 +15,40 @@ import java.util.zip.*;
 * specific language governing permissions and limitations
 * under the License.
 */
-public class FileHandler {
+package org.wso2.security.tools.findsecbugs.scanner.handler;
 
+import org.codehaus.plexus.util.FileUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.web.multipart.MultipartFile;
+import org.wso2.security.tools.findsecbugs.scanner.Constants;
+
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Enumeration;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
+import java.util.zip.ZipOutputStream;
+
+/**
+ * Utility methods for file handling
+ *
+ * @author Deshani Geethika
+ */
+public class FileHandler {
     private final static Logger LOGGER = LoggerFactory.getLogger(FileHandler.class);
 
-    public static void findFilesAndMoveToFolder(String sourcePath, String destinationPath, String fileName) {
+    /**
+     * Traverse and find files with a specific name, rename them and move to a new folder.
+     * <p>Since products have different modules with pom.xml files, after building the product scanning reports with the same name are are generated in target folders.
+     * Therefore, these files are renamed with the file path, and all the files are moved to one folder</p>
+     *
+     * @param sourcePath      Path of the folder to be traversed
+     * @param destinationPath Path of the folder to add reports
+     * @param fileName        Name of the file to be searched
+     */
+    public static void findFilesRenameAndMoveToFolder(String sourcePath, String destinationPath, String fileName) {
         try {
             File dir = new File(destinationPath);
             if (dir.mkdir()) {
@@ -57,7 +71,14 @@ public class FileHandler {
         }
     }
 
-    public static void zipFolder(File fileToZip, String fileName, ZipOutputStream zipOut) {
+    /**
+     * Compress a folder into a ZIP file
+     *
+     * @param fileToZip              File to zip
+     * @param fileToZipName          Name of the file to zip
+     * @param destinationZipFilePath Path of the destination zip file
+     */
+    public static void zipFolder(File fileToZip, String fileToZipName, String destinationZipFilePath) {
         try {
             if (fileToZip.isHidden()) {
                 return;
@@ -65,12 +86,14 @@ public class FileHandler {
             if (fileToZip.isDirectory()) {
                 File[] children = fileToZip.listFiles();
                 for (File childFile : children) {
-                    zipFolder(childFile, fileName + File.separator + childFile.getName(), zipOut);
+                    zipFolder(childFile, fileToZipName + File.separator + childFile.getName(), destinationZipFilePath);
                 }
                 return;
             }
             FileInputStream fis = new FileInputStream(fileToZip);
-            ZipEntry zipEntry = new ZipEntry(fileName);
+            ZipEntry zipEntry = new ZipEntry(fileToZipName);
+            FileOutputStream fos = new FileOutputStream(destinationZipFilePath);
+            ZipOutputStream zipOut = new ZipOutputStream(fos);
             zipOut.putNextEntry(zipEntry);
             byte[] bytes = new byte[1024];
             int length;
@@ -78,11 +101,19 @@ public class FileHandler {
                 zipOut.write(bytes, 0, length);
             }
             fis.close();
+            zipOut.close();
+            fos.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    /**
+     * Extract a zip file and returns name of the extracted folder
+     *
+     * @param zipFilePath ZIP file path
+     * @return Extracted folder name
+     */
     public static String extractZipFile(String zipFilePath) {
         try {
             int BUFFER = 2048;
@@ -133,14 +164,21 @@ public class FileHandler {
         return null;
     }
 
-    public static boolean uploadFile(MultipartFile file, String filePath) {
+    /**
+     * Upload a {@code MultipartFile} to a specified location
+     *
+     * @param file            File to be uploaded
+     * @param destinationPath Destination path to upload the file
+     * @return Boolean to indicate the operation is success
+     */
+    public static boolean uploadFile(MultipartFile file, String destinationPath) {
         try {
             byte[] bytes = file.getBytes();
-            BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File(filePath)));
+            BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File(destinationPath)));
             stream.write(bytes);
             stream.close();
             LOGGER.info("File successfully uploaded");
-            if (new File(filePath).exists()) {
+            if (new File(destinationPath).exists()) {
                 return true;
             }
         } catch (IOException e) {

@@ -1,4 +1,4 @@
-package org.wso2.security.tools.findsecbugs.scanner;/*
+package org.wso2.security.tools.findsecbugs.scanner.service;/*
 *  Copyright (c) ${date}, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
 *
 *  WSO2 Inc. licenses this file to you under the Apache License,
@@ -21,13 +21,17 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import org.wso2.security.tools.findsecbugs.scanner.scanners.MainScanner;
-import org.wso2.security.tools.findsecbugs.scanner.handlers.FileHandler;
+import org.wso2.security.tools.findsecbugs.scanner.Constants;
+import org.wso2.security.tools.findsecbugs.scanner.NotificationManager;
+import org.wso2.security.tools.findsecbugs.scanner.handler.FileHandler;
+import org.wso2.security.tools.findsecbugs.scanner.scanner.MainScanner;
 
 import javax.servlet.http.HttpServletResponse;
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Observer;
-import java.util.zip.ZipOutputStream;
 
 @Service
 public class FindSecBugsScannerService {
@@ -70,23 +74,16 @@ public class FindSecBugsScannerService {
                 LOGGER.info("FindSecBugs scanning completed");
                 NotificationManager.notifyScanStatus("completed");
                 NotificationManager.notifyReportReady(true);
-                try {
-                    LOGGER.info("Zipping the reports folder");
-                    FileOutputStream fos = new FileOutputStream(Constants.REPORTS_FOLDER_PATH + Constants.ZIP_FILE_EXTENSION);
-                    ZipOutputStream zipOut = new ZipOutputStream(fos);
-                    File fileToZip = new File(Constants.REPORTS_FOLDER_PATH);
 
-                    FileHandler.zipFolder(fileToZip, fileToZip.getName(), zipOut);
-                    zipOut.close();
-                    fos.close();
+                LOGGER.info("Zipping the reports folder");
+                File fileToZip = new File(Constants.REPORTS_FOLDER_PATH);
+                String destinationZipFilePath = Constants.REPORTS_FOLDER_PATH + Constants.ZIP_FILE_EXTENSION;
 
-                    LOGGER.info("Report zip file ready");
-                    NotificationManager.notifyReportReady(true);
+                FileHandler.zipFolder(fileToZip, fileToZip.getName(), destinationZipFilePath);
 
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    LOGGER.error(e.getMessage());
-                }
+                LOGGER.info("Report zip file ready");
+                NotificationManager.notifyReportReady(true);
+
             } else {
                 LOGGER.error("FindSecBugs scan failed");
             }
