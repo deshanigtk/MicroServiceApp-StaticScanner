@@ -1,4 +1,4 @@
-package org.wso2.security.staticscanner.scanners;/*
+package org.wso2.security.tools.findsecbugs.scanner.scanners;/*
 *  Copyright (c) ${date}, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
 *
 *  WSO2 Inc. licenses this file to you under the Apache License,
@@ -18,10 +18,10 @@ package org.wso2.security.staticscanner.scanners;/*
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.wso2.security.staticscanner.Constants;
-import org.wso2.security.staticscanner.NotificationManager;
-import org.wso2.security.staticscanner.handlers.FileHandler;
-import org.wso2.security.staticscanner.handlers.GitHandler;
+import org.wso2.security.tools.findsecbugs.scanner.Constants;
+import org.wso2.security.tools.findsecbugs.scanner.NotificationManager;
+import org.wso2.security.tools.findsecbugs.scanner.handlers.FileHandler;
+import org.wso2.security.tools.findsecbugs.scanner.handlers.GitHandler;
 
 import java.io.File;
 import java.util.Observable;

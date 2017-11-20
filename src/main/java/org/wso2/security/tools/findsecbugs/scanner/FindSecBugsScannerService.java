@@ -1,4 +1,4 @@
-package org.wso2.security.staticscanner;/*
+package org.wso2.security.tools.findsecbugs.scanner;/*
 *  Copyright (c) ${date}, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
 *
 *  WSO2 Inc. licenses this file to you under the Apache License,
@@ -21,8 +21,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import org.wso2.security.staticscanner.handlers.FileHandler;
-import org.wso2.security.staticscanner.scanners.MainScanner;
+import org.wso2.security.tools.findsecbugs.scanner.scanners.MainScanner;
+import org.wso2.security.tools.findsecbugs.scanner.handlers.FileHandler;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;

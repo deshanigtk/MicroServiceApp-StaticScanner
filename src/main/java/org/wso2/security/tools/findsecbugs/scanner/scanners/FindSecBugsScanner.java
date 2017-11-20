@@ -1,14 +1,14 @@
-package org.wso2.security.staticscanner.scanners;
+package org.wso2.security.tools.findsecbugs.scanner.scanners;
 
 import org.apache.maven.shared.invoker.MavenInvocationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
-import org.wso2.security.staticscanner.Constants;
-import org.wso2.security.staticscanner.NotificationManager;
-import org.wso2.security.staticscanner.handlers.FileHandler;
-import org.wso2.security.staticscanner.handlers.MavenHandler;
-import org.wso2.security.staticscanner.handlers.XMLHandler;
+import org.wso2.security.tools.findsecbugs.scanner.Constants;
+import org.wso2.security.tools.findsecbugs.scanner.NotificationManager;
+import org.wso2.security.tools.findsecbugs.scanner.handlers.MavenHandler;
+import org.wso2.security.tools.findsecbugs.scanner.handlers.XMLHandler;
+import org.wso2.security.tools.findsecbugs.scanner.handlers.FileHandler;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.DocumentBuilder;

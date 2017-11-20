@@ -1,4 +1,4 @@
-package org.wso2.security.staticscanner;
+package org.wso2.security.tools.findsecbugs.scanner;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

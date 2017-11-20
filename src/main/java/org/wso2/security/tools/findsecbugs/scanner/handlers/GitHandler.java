@@ -1,4 +1,4 @@
-package org.wso2.security.staticscanner.handlers;/*
+package org.wso2.security.tools.findsecbugs.scanner.handlers;/*
 *  Copyright (c) ${date}, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
 *
 *  WSO2 Inc. licenses this file to you under the Apache License,
@@ -25,7 +25,7 @@ import org.eclipse.jgit.lib.TextProgressMonitor;
 import org.eclipse.jgit.transport.UsernamePasswordCredentialsProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.wso2.security.staticscanner.Constants;
+import org.wso2.security.tools.findsecbugs.scanner.Constants;
 
 import java.io.File;
 import java.io.IOException;

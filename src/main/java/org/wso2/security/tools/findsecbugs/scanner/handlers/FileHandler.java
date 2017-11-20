@@ -1,11 +1,11 @@
-package org.wso2.security.staticscanner.handlers;
+package org.wso2.security.tools.findsecbugs.scanner.handlers;
 
 
 import org.codehaus.plexus.util.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.multipart.MultipartFile;
-import org.wso2.security.staticscanner.Constants;
+import org.wso2.security.tools.findsecbugs.scanner.Constants;
 
 import java.io.*;
 import java.nio.file.Files;

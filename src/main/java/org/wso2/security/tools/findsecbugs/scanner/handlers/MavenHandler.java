@@ -1,7 +1,7 @@
-package org.wso2.security.staticscanner.handlers;
+package org.wso2.security.tools.findsecbugs.scanner.handlers;
 
 import org.apache.maven.shared.invoker.*;
-import org.wso2.security.staticscanner.scanners.MainScanner;
+import org.wso2.security.tools.findsecbugs.scanner.scanners.MainScanner;
 
 import java.io.File;
 import java.util.Collections;

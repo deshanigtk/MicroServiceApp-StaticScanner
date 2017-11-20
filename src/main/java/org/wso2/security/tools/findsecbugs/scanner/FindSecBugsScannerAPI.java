@@ -1,4 +1,4 @@
-package org.wso2.security.staticscanner;
+package org.wso2.security.tools.findsecbugs.scanner;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,7 +25,7 @@ import javax.servlet.http.HttpServletResponse;
 * under the License.
 */
 @Controller
-@RequestMapping("staticScanner")
+@RequestMapping("findsecbugsScanner")
 public class FindSecBugsScannerAPI {
 
     private final FindSecBugsScannerService findSecBugsScannerService;
