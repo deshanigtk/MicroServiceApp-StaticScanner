@@ -1,5 +1,3 @@
-package org.wso2.security.tools.findsecbugs.scanner;
-
 /*
 *  Copyright (c) ${date}, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
 *
@@ -17,6 +15,7 @@ package org.wso2.security.tools.findsecbugs.scanner;
 * specific language governing permissions and limitations
 * under the License.
 */
+package org.wso2.security.tools.findsecbugs.scanner;
 
 public final class Constants {
     public static final String FIND_SEC_BUGS_REPORTS_FOLDER = "Find-Sec-Bugs-Reports";

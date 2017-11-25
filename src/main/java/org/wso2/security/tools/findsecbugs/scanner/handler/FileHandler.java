@@ -33,41 +33,39 @@ import java.util.zip.ZipOutputStream;
 
 /**
  * Utility methods for file handling
- *
- * @author Deshani Geethika
  */
 public class FileHandler {
     private final static Logger LOGGER = LoggerFactory.getLogger(FileHandler.class);
 
     /**
      * Traverse and find files with a specific name, rename them and move to a new folder.
-     * <p>Since products have different modules with pom.xml files, after building the product scanning reports with the same name are are generated in target folders.
+     * <p>Since products have different modules with pom.xml files, after building the product scanning reports with
+     * the same name are are generated in target folders.
      * Therefore, these files are renamed with the file path, and all the files are moved to one folder</p>
      *
      * @param sourcePath      Path of the folder to be traversed
      * @param destinationPath Path of the folder to add reports
      * @param fileName        Name of the file to be searched
+     * @throws IOException If an error occurs while I/O operations
      */
-    public static void findFilesRenameAndMoveToFolder(String sourcePath, String destinationPath, String fileName) {
-        try {
-            File dir = new File(destinationPath);
-            if (dir.mkdir()) {
-                Files.find(Paths.get(sourcePath), Integer.MAX_VALUE,
-                        (filePath, fileAttr) -> filePath.getFileName().toString().equals(fileName)).forEach((f) -> {
+    public static void findFilesRenameAndMoveToFolder(String sourcePath, String destinationPath, String fileName)
+            throws IOException {
+        File dir = new File(destinationPath);
+        if (dir.mkdir()) {
+            Files.find(Paths.get(sourcePath), Integer.MAX_VALUE,
+                    (filePath, fileAttr) -> filePath.getFileName().toString().equals(fileName)).forEach((f) -> {
 
-                    File file = f.toFile();
-                    String newFileName = file.getAbsolutePath().replace(sourcePath, Constants.NULL_STRING).replace(File.separator, Constants.UNDERSCORE);
-                    File newFile = new File(destinationPath + File.separator + newFileName);
-                    file.renameTo(newFile);
-                    try {
-                        FileUtils.copyFileToDirectory(newFile, dir);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                });
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+                File file = f.toFile();
+                String newFileName = file.getAbsolutePath().replace(sourcePath, Constants.NULL_STRING).replace(File
+                        .separator, Constants.UNDERSCORE);
+                File newFile = new File(destinationPath + File.separator + newFileName);
+                file.renameTo(newFile);
+                try {
+                    FileUtils.copyFileToDirectory(newFile, dir);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
         }
     }
 
@@ -77,35 +75,33 @@ public class FileHandler {
      * @param fileToZip              File to zip
      * @param fileToZipName          Name of the file to zip
      * @param destinationZipFilePath Path of the destination zip file
+     * @throws IOException If an error occurs while I/O operations
      */
-    public static void zipFolder(File fileToZip, String fileToZipName, String destinationZipFilePath) {
-        try {
-            if (fileToZip.isHidden()) {
-                return;
-            }
-            if (fileToZip.isDirectory()) {
-                File[] children = fileToZip.listFiles();
-                for (File childFile : children) {
-                    zipFolder(childFile, fileToZipName + File.separator + childFile.getName(), destinationZipFilePath);
-                }
-                return;
-            }
-            FileInputStream fis = new FileInputStream(fileToZip);
-            ZipEntry zipEntry = new ZipEntry(fileToZipName);
-            FileOutputStream fos = new FileOutputStream(destinationZipFilePath);
-            ZipOutputStream zipOut = new ZipOutputStream(fos);
-            zipOut.putNextEntry(zipEntry);
-            byte[] bytes = new byte[1024];
-            int length;
-            while ((length = fis.read(bytes)) >= 0) {
-                zipOut.write(bytes, 0, length);
-            }
-            fis.close();
-            zipOut.close();
-            fos.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+    public static void zipFolder(File fileToZip, String fileToZipName, String destinationZipFilePath) throws
+            IOException {
+        if (fileToZip.isHidden()) {
+            return;
         }
+        if (fileToZip.isDirectory()) {
+            File[] children = fileToZip.listFiles();
+            for (File childFile : children) {
+                zipFolder(childFile, fileToZipName + File.separator + childFile.getName(), destinationZipFilePath);
+            }
+            return;
+        }
+        FileInputStream fis = new FileInputStream(fileToZip);
+        ZipEntry zipEntry = new ZipEntry(fileToZipName);
+        FileOutputStream fos = new FileOutputStream(destinationZipFilePath);
+        ZipOutputStream zipOut = new ZipOutputStream(fos);
+        zipOut.putNextEntry(zipEntry);
+        byte[] bytes = new byte[1024];
+        int length;
+        while ((length = fis.read(bytes)) >= 0) {
+            zipOut.write(bytes, 0, length);
+        }
+        fis.close();
+        zipOut.close();
+        fos.close();
     }
 
     /**
@@ -113,55 +109,47 @@ public class FileHandler {
      *
      * @param zipFilePath ZIP file path
      * @return Extracted folder name
+     * @throws IOException If an error occurs while I/O operations
      */
-    public static String extractZipFile(String zipFilePath) {
-        try {
-            int BUFFER = 2048;
-            File file = new File(zipFilePath);
-            ZipFile zip = new ZipFile(file);
-            String newPath = file.getParent();
-            String fileName = file.getName();
-            Enumeration zipFileEntries = zip.entries();
+    public static String extractZipFile(String zipFilePath) throws IOException {
+        int BUFFER = 2048;
+        File file = new File(zipFilePath);
+        ZipFile zip = new ZipFile(file);
+        String newPath = file.getParent();
+        String fileName = file.getName();
+        Enumeration zipFileEntries = zip.entries();
 
-            // Process each entry
-            while (zipFileEntries.hasMoreElements()) {
-                // grab a zip file entry
-                ZipEntry entry = (ZipEntry) zipFileEntries.nextElement();
-                String currentEntry = entry.getName();
-                File destFile = new File(newPath, currentEntry);
-                File destinationParent = destFile.getParentFile();
-                // create the parent directory structure if needed
-                destinationParent.mkdirs();
+        while (zipFileEntries.hasMoreElements()) {
+            // grab a zip file entry
+            ZipEntry entry = (ZipEntry) zipFileEntries.nextElement();
+            String currentEntry = entry.getName();
+            File destFile = new File(newPath, currentEntry);
+            File destinationParent = destFile.getParentFile();
+            // create the parent directory structure if needed
+            destinationParent.mkdirs();
 
-                if (!entry.isDirectory()) {
-                    BufferedInputStream is = new BufferedInputStream(zip.getInputStream(entry));
-                    int currentByte;
-                    // establish buffer for writing file
-                    byte data[] = new byte[BUFFER];
-
-                    // write the current file to disk
-                    FileOutputStream fos = new FileOutputStream(destFile);
-                    BufferedOutputStream dest = new BufferedOutputStream(fos, BUFFER);
-
-                    // read and write until last byte is encountered
-                    while ((currentByte = is.read(data, 0, BUFFER)) != -1) {
-                        dest.write(data, 0, currentByte);
-                    }
-                    dest.flush();
-                    dest.close();
-                    is.close();
+            if (!entry.isDirectory()) {
+                BufferedInputStream is = new BufferedInputStream(zip.getInputStream(entry));
+                int currentByte;
+                // establish buffer for writing file
+                byte data[] = new byte[BUFFER];
+                // write the current file to disk
+                FileOutputStream fos = new FileOutputStream(destFile);
+                BufferedOutputStream dest = new BufferedOutputStream(fos, BUFFER);
+                // read and write until last byte is encountered
+                while ((currentByte = is.read(data, 0, BUFFER)) != -1) {
+                    dest.write(data, 0, currentByte);
                 }
-                if (currentEntry.endsWith(Constants.ZIP_FILE_EXTENSION)) {
-                    // found a zip file, try to open
-                    extractZipFile(destFile.getAbsolutePath());
-                }
+                dest.flush();
+                dest.close();
+                is.close();
             }
-            //FileUtils.deleteDirectory(new File(zipFolder));
-            return fileName.substring(0, fileName.length() - 4);
-        } catch (IOException e) {
-            e.printStackTrace();
+            if (currentEntry.endsWith(Constants.ZIP_FILE_EXTENSION)) {
+                // found a zip file, try to open
+                extractZipFile(destFile.getAbsolutePath());
+            }
         }
-        return null;
+        return fileName.substring(0, fileName.length() - 4);
     }
 
     /**
@@ -169,21 +157,12 @@ public class FileHandler {
      *
      * @param file            File to be uploaded
      * @param destinationPath Destination path to upload the file
-     * @return Boolean to indicate the operation is success
+     * @throws IOException If an error occurs while I/O operations
      */
-    public static boolean uploadFile(MultipartFile file, String destinationPath) {
-        try {
-            byte[] bytes = file.getBytes();
-            BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File(destinationPath)));
-            stream.write(bytes);
-            stream.close();
-            LOGGER.info("File successfully uploaded");
-            if (new File(destinationPath).exists()) {
-                return true;
-            }
-        } catch (IOException e) {
-            LOGGER.error("File is not uploaded" + e.toString());
-        }
-        return false;
+    public static void uploadFile(MultipartFile file, String destinationPath) throws IOException {
+        byte[] bytes = file.getBytes();
+        BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File(destinationPath)));
+        stream.write(bytes);
+        stream.close();
     }
 }

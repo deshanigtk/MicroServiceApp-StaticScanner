@@ -32,47 +32,51 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 /**
- * Utility methods for Git handling
+ * Utility methods for handling Git
  *
- * @author Deshani Geethika
+ * @see org.eclipse.jgit
  */
 @SuppressWarnings({"unused"})
 public class GitHandler {
     private static final Logger LOGGER = LoggerFactory.getLogger(GitHandler.class);
 
     /**
-     * Clone from GitHub and returns a {@link Git} object. If the URL is related to a private repository, GitHub account credentials should be given
+     * Clone from GitHub and returns a {@link Git} object. If the URL is related to a private
+     * repository, GitHub account credentials should be given
      *
-     * @param gitURL   GitHub URL to clone the product. By default master branch is cloned. If a specific branch or tag to be cloned, the specified URL for the branch or tag should be given
+     * @param gitURL   GitHub URL to clone the product. By default master branch is cloned. If a specific branch or
+     *                 tag to be cloned, the specified URL for the branch or tag should be given
      * @param username GitHub user name if the product is in a private repository
      * @param password GitHub password if the product is in private repository
      * @param filePath Set directory to clone the product
      * @return {@link Git} object
+     * @throws GitAPIException Exceptions thrown by {@link org.eclipse.jgit}
      */
-    public static Git gitClone(String gitURL, String username, String password, String filePath) {
-        try {
-            String branch = "master";
-            if (gitURL.contains("/tree/")) {
-                branch = gitURL.substring(gitURL.lastIndexOf("/") + 1);
-                gitURL = gitURL.substring(0, gitURL.indexOf("/tree/"));
-            }
-            CloneCommand cloneCommand = Git.cloneRepository()
-                    .setProgressMonitor(new TextProgressMonitor(new PrintWriter(System.out)))
-                    .setURI(gitURL)
-                    .setDirectory(new File(filePath))
-                    .setBranch(branch);
-
-            if (username != null && password != null) {
-                cloneCommand.setCredentialsProvider(new UsernamePasswordCredentialsProvider(username, password));
-            }
-            return cloneCommand.call();
-        } catch (GitAPIException e) {
-            e.printStackTrace();
-            LOGGER.error(e.getMessage());
+    public static Git gitClone(String gitURL, String username, String password, String filePath) throws
+            GitAPIException {
+        String branch = "master";
+        if (gitURL.contains("/tree/")) {
+            branch = gitURL.substring(gitURL.lastIndexOf("/") + 1);
+            gitURL = gitURL.substring(0, gitURL.indexOf("/tree/"));
         }
-        return null;
+        CloneCommand cloneCommand = Git.cloneRepository()
+                .setProgressMonitor(new TextProgressMonitor(new PrintWriter(System.out)))
+                .setURI(gitURL)
+                .setDirectory(new File(filePath))
+                .setBranch(branch);
+
+        if (username != null && password != null) {
+            cloneCommand.setCredentialsProvider(new UsernamePasswordCredentialsProvider(username, password));
+        }
+        return cloneCommand.call();
     }
 
+    /**
+     * Check whether a git clone operation is success
+     *
+     * @param repo Repository to check
+     * @return Boolean to indicate whether a git operation is success
+     */
     public static boolean hasAtLeastOneReference(Repository repo) {
         for (Ref ref : repo.getAllRefs().values()) {
             if (ref.getObjectId() == null) {
@@ -83,20 +87,25 @@ public class GitHandler {
         return false;
     }
 
-    private static Ref gitCheckout(String tag, Git git) {
-        try {
-            return git.checkout().setName(tag).call();
-        } catch (GitAPIException e) {
-            e.printStackTrace();
-            LOGGER.error(e.getMessage());
-        }
-        return null;
+    /**
+     * Perform Git checkout operation and returns a {@link Ref} object
+     *
+     * @param tagOrBranch Tag or branch to checkout
+     * @param git         Git object to checkout (When a Git clone operation is done, a Git object is returned. It
+     *                    should be passed to checkout)
+     * @return a reference object to the branch/ tag
+     * @throws GitAPIException Exceptions thrown by {@link org.eclipse.jgit}
+     */
+    private static Ref gitCheckout(String tagOrBranch, Git git) throws GitAPIException {
+        return git.checkout().setName(tagOrBranch).call();
     }
 
-    public static String gitDescribe(Git git) throws GitAPIException {
-        return git.describe().call();
-    }
-
+    /**
+     * @param productPath The repository to open. May be either the GIT_DIR, or the working tree directory that
+     *                    contains {@code .git}
+     * @return {@link Git} object for the existing git repository
+     * @throws IOException
+     */
     public static Git gitOpen(String productPath) throws IOException {
         return Git.open(new File(productPath));
     }

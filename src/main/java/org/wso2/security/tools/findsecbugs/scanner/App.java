@@ -1,8 +1,3 @@
-package org.wso2.security.tools.findsecbugs.scanner;
-
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-
 /*
 *  Copyright (c) ${date}, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
 *
@@ -20,6 +15,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 * specific language governing permissions and limitations
 * under the License.
 */
+package org.wso2.security.tools.findsecbugs.scanner;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class App {

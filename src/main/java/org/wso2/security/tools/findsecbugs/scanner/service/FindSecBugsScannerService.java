@@ -1,4 +1,4 @@
-package org.wso2.security.tools.findsecbugs.scanner.service;/*
+/*
 *  Copyright (c) ${date}, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
 *
 *  WSO2 Inc. licenses this file to you under the Apache License,
@@ -15,16 +15,20 @@ package org.wso2.security.tools.findsecbugs.scanner.service;/*
 * specific language governing permissions and limitations
 * under the License.
 */
+package org.wso2.security.tools.findsecbugs.scanner.service;
 
 import org.apache.tomcat.util.http.fileupload.IOUtils;
+import org.eclipse.jgit.api.errors.GitAPIException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.wso2.security.tools.findsecbugs.scanner.Constants;
 import org.wso2.security.tools.findsecbugs.scanner.NotificationManager;
+import org.wso2.security.tools.findsecbugs.scanner.exception.FindSecBugsScannerException;
 import org.wso2.security.tools.findsecbugs.scanner.handler.FileHandler;
-import org.wso2.security.tools.findsecbugs.scanner.scanner.MainScanner;
+import org.wso2.security.tools.findsecbugs.scanner.handler.GitHandler;
+import org.wso2.security.tools.findsecbugs.scanner.scanner.FindSecBugsScannerExecutor;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
@@ -37,62 +41,87 @@ import java.util.Observer;
 public class FindSecBugsScannerService {
     private final Logger LOGGER = LoggerFactory.getLogger(FindSecBugsScannerService.class);
 
-    private boolean configureNotificationManager(String containerId, String automationManagerHost, int automationManagerPort) {
+    private boolean configureNotificationManager(String containerId, String automationManagerHost, int
+            automationManagerPort) {
         NotificationManager.configure(containerId, automationManagerHost, automationManagerPort);
         return NotificationManager.isConfigured();
     }
 
-    public String startScan(String automationManagerHost, int automationManagerPort, String containerId, boolean isFileUpload,
-                            MultipartFile zipFile, String gitUrl, String gitUsername, String gitPassword) {
+    public void startScan(String automationManagerHost, int automationManagerPort, String containerId, boolean
+            isFileUpload, MultipartFile zipFile, String gitUrl, String gitUsername, String gitPassword) throws
+            FindSecBugsScannerException {
 
         String zipFileName = null;
+        File productFolder = new File(Constants.DEFAULT_PRODUCT_PATH);
+        validate(automationManagerHost, automationManagerPort, containerId, isFileUpload, zipFile, gitUrl);
+        if (isFileUpload) {
+            try {
+                zipFileName = zipFile.getOriginalFilename();
+                uploadZipFile(zipFile, productFolder);
+                NotificationManager.notifyFileUploaded(true);
+            } catch (IOException e) {
+                NotificationManager.notifyFileUploaded(false);
+                throw new FindSecBugsScannerException("Error occurred while uploading zip file", e);
+            }
+        } else {
+            try {
+                GitHandler.gitClone(gitUrl, gitUsername, gitPassword, Constants.DEFAULT_PRODUCT_PATH);
+                NotificationManager.notifyProductCloned(true);
+            } catch (GitAPIException e) {
+                NotificationManager.notifyProductCloned(false);
+                throw new FindSecBugsScannerException("Error occurred while cloning", e);
+            }
+        }
+        Observer mainScannerObserver = observe();
+        FindSecBugsScannerExecutor findSecBugsScannerExecutor = new FindSecBugsScannerExecutor(isFileUpload,
+                zipFileName, gitUrl, gitUsername, gitPassword);
+        findSecBugsScannerExecutor.addObserver(mainScannerObserver);
+        new Thread(findSecBugsScannerExecutor).start();
+    }
+
+
+    private void validate(String automationManagerHost, int automationManagerPort, String containerId, boolean
+            isFileUpload, MultipartFile zipFile, String gitUrl) throws FindSecBugsScannerException {
         if (!configureNotificationManager(containerId, automationManagerHost, automationManagerPort)) {
-            return "Notification manager is not configured";
+            throw new FindSecBugsScannerException("Notification Manager not configured");
         }
         if (isFileUpload) {
             if (zipFile == null || !zipFile.getOriginalFilename().endsWith(".zip")) {
-                return "Please upload a zip file";
-            } else {
-                zipFileName = zipFile.getOriginalFilename();
-                if (new File(Constants.DEFAULT_PRODUCT_PATH).exists() || new File(Constants.DEFAULT_PRODUCT_PATH).mkdir()) {
-                    String fileUploadPath = Constants.DEFAULT_PRODUCT_PATH + File.separator + zipFileName;
-                    if (FileHandler.uploadFile(zipFile, fileUploadPath)) {
-                        LOGGER.info("File successfully uploaded");
-                    } else {
-                        return "Error occurred while uploading zip file";
-                    }
-                }
+                throw new FindSecBugsScannerException("No zip file available");
             }
         } else {
             if (gitUrl == null) {
-                return "Please enter a URL and branch to perform clone operation";
+                throw new FindSecBugsScannerException("Git URL is not defined");
             }
         }
+    }
 
-        Observer mainScannerObserver = (o, arg) -> {
-            if (new File(Constants.REPORTS_FOLDER_PATH + File.separator + Constants.FIND_SEC_BUGS_REPORTS_FOLDER).exists()) {
-                LOGGER.info("FindSecBugs scanning completed");
-                NotificationManager.notifyScanStatus("completed");
-                NotificationManager.notifyReportReady(true);
+    private void uploadZipFile(MultipartFile zipFile, File productFolder) throws IOException {
+        String zipFileName = zipFile.getOriginalFilename();
+        if (productFolder.exists() || productFolder.mkdir()) {
+            String fileUploadPath = Constants.DEFAULT_PRODUCT_PATH + File.separator + zipFileName;
+            FileHandler.uploadFile(zipFile, fileUploadPath);
+            NotificationManager.notifyFileUploaded(true);
+        }
+    }
 
-                LOGGER.info("Zipping the reports folder");
+    private Observer observe() {
+        return (o, arg) -> {
+            if (new File(Constants.REPORTS_FOLDER_PATH + File.separator + Constants.FIND_SEC_BUGS_REPORTS_FOLDER)
+                    .exists()) {
                 File fileToZip = new File(Constants.REPORTS_FOLDER_PATH);
                 String destinationZipFilePath = Constants.REPORTS_FOLDER_PATH + Constants.ZIP_FILE_EXTENSION;
-
-                FileHandler.zipFolder(fileToZip, fileToZip.getName(), destinationZipFilePath);
-
-                LOGGER.info("Report zip file ready");
+                try {
+                    FileHandler.zipFolder(fileToZip, fileToZip.getName(), destinationZipFilePath);
+                } catch (IOException e) {
+                    NotificationManager.notifyReportReady(false);
+                }
                 NotificationManager.notifyReportReady(true);
 
             } else {
-                LOGGER.error("FindSecBugs scan failed");
+                NotificationManager.notifyReportReady(false);
             }
         };
-
-        MainScanner mainScanner = new MainScanner(isFileUpload, zipFileName, gitUrl, gitUsername, gitPassword);
-        mainScanner.addObserver(mainScannerObserver);
-        new Thread(mainScanner).start();
-        return "Ok";
     }
 
     public void getReport(HttpServletResponse response) {

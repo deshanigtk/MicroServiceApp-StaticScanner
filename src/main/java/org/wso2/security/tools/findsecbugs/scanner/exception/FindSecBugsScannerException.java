@@ -19,17 +19,16 @@
 package org.wso2.security.tools.findsecbugs.scanner.exception;
 
 /**
- * The class {@code FindSecBugsScannerRuntimeException} wraps all the Exceptions and return a new {@link RuntimeException} with the type of {@code FindSecBugsScannerRuntimeException}
+ * The class {@code FindSecBugsScannerException} wraps the Exceptions and return a new {@link Exception} with the
+ * type of {@code FindSecBugsScannerException}
  *
- * @author Deshani Geethika
- * @see RuntimeException
+ * @see Exception
  */
-public class FindSecBugsScannerRuntimeException extends RuntimeException {
+public class FindSecBugsScannerException extends Exception {
     /**
-     * Constructs a new runtime exception with {@code null} as its
-     * detail message.
+     * Constructs a new runtime exception with {@code null} as its detail message.
      */
-    public FindSecBugsScannerRuntimeException() {
+    public FindSecBugsScannerException() {
         super();
     }
 
@@ -38,15 +37,14 @@ public class FindSecBugsScannerRuntimeException extends RuntimeException {
      *
      * @param message Message for the exception
      */
-    public FindSecBugsScannerRuntimeException(String message) {
+    public FindSecBugsScannerException(String message) {
         super(message);
     }
 
     /**
-     * Constructs a new runtime exception with the specified detail message and
-     * cause.
+     * Constructs a new runtime exception with the specified detail message and cause.
      */
-    public FindSecBugsScannerRuntimeException(String message, Throwable e) {
+    public FindSecBugsScannerException(String message, Throwable e) {
         super(message, e);
     }
 }

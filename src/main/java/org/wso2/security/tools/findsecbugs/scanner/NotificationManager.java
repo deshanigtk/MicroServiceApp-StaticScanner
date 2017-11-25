@@ -1,4 +1,4 @@
-package org.wso2.security.tools.findsecbugs.scanner;/*
+/*
 *  Copyright (c) ${date}, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
 *
 *  WSO2 Inc. licenses this file to you under the Apache License,
@@ -15,6 +15,7 @@ package org.wso2.security.tools.findsecbugs.scanner;/*
 * specific language governing permissions and limitations
 * under the License.
 */
+package org.wso2.security.tools.findsecbugs.scanner;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -31,16 +32,15 @@ import java.net.URISyntaxException;
 public class NotificationManager {
 
     private final static String NOTIFY = "automationManager/staticScanner/notify";
+    private final static String FILE_UPLOADED = NOTIFY + "/fileUploaded";
     private final static String FILE_EXTRACTED = NOTIFY + "/fileExtracted";
     private final static String PRODUCT_CLONED = NOTIFY + "/productCloned";
     private final static String SCAN_STATUS = NOTIFY + "/scanStatus";
     private final static String REPORT_READY = NOTIFY + "/reportReady";
-
+    private static final Logger LOGGER = LoggerFactory.getLogger(NotificationManager.class);
     private static String myContainerId;
     private static String automationManagerHost;
     private static int automationManagerPort;
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(NotificationManager.class);
 
     public static void configure(String myContainerId, String automationManagerHost, int automationManagerPort) {
         NotificationManager.myContainerId = myContainerId;
@@ -50,11 +50,12 @@ public class NotificationManager {
 
     private static void notifyStatus(String path, boolean status) {
         try {
-            URI uri = (new URIBuilder()).setHost(automationManagerHost).setPort(automationManagerPort).setScheme("http").setPath(path)
+            URI uri = (new URIBuilder()).setHost(automationManagerHost).setPort(automationManagerPort).setScheme
+                    ("http").setPath(path)
                     .addParameter("containerId", myContainerId)
                     .addParameter("status", String.valueOf(status))
                     .build();
-            LOGGER.info("Notifying status: " + uri);
+            LOGGER.info("Notifying status");
             HttpClient httpClient = HttpClientBuilder.create().build();
             HttpGet get = new HttpGet(uri);
 
@@ -70,7 +71,8 @@ public class NotificationManager {
 
     public static void notifyScanStatus(String status) {
         try {
-            URI uri = (new URIBuilder()).setHost(automationManagerHost).setPort(automationManagerPort).setScheme("http").setPath(SCAN_STATUS)
+            URI uri = (new URIBuilder()).setHost(automationManagerHost).setPort(automationManagerPort).setScheme
+                    ("http").setPath(SCAN_STATUS)
                     .addParameter("containerId", myContainerId)
                     .addParameter("status", status)
                     .build();
@@ -87,6 +89,10 @@ public class NotificationManager {
             e.printStackTrace();
             LOGGER.error(e.toString());
         }
+    }
+
+    public static void notifyFileUploaded(boolean status) {
+        notifyStatus(FILE_UPLOADED, status);
     }
 
     public static void notifyFileExtracted(boolean status) {

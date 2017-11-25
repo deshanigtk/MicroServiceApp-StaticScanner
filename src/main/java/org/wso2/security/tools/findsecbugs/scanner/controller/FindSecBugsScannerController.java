@@ -21,14 +21,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.wso2.security.tools.findsecbugs.scanner.exception.FindSecBugsScannerException;
 import org.wso2.security.tools.findsecbugs.scanner.service.FindSecBugsScannerService;
 
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * The class {@code FindSecBugsScannerController} is the web controller which defines the routines for initiating FIndSecBugs scans
- *
- * @author Deshani Geethika
+ * The class {@code FindSecBugsScannerController} is the web controller which defines the routines for initiating
+ * FindSecBugs scans
  */
 @Controller
 @RequestMapping("findSecBugsScanner")
@@ -42,7 +42,9 @@ public class FindSecBugsScannerController {
 
     /**
      * Controller method to check whether the micro service is started
-     * Since this micro service is started inside a Docker container, Automation Manager (which handles containers such as start container, send request to container API etc.) calls this API to identify whether the micro service is started
+     * <p>Since this micro service is started inside a Docker container, Automation Manager (which handles containers
+     * such as start container, send request to container API etc.) calls this API to identify whether the micro
+     * service is started</p>
      *
      * @return true
      */
@@ -58,29 +60,35 @@ public class FindSecBugsScannerController {
      * @param automationManagerHost Automation Manager host
      * @param automationManagerPort Automation Manager port
      * @param myContainerId         Container Id of this (Since this micro service is running inside a container)
-     * @param isFileUpload          True means the product to be scanned is uploaded as a zip file. False means the product should be cloned from GitHub
+     * @param isFileUpload          True means the product to be scanned is uploaded as a zip file. False means the
+     *                              product should be cloned from GitHub
      * @param zipFile               ZIP file of the product source code
-     * @param gitUrl                GitHub URL to clone the product. By default master branch is cloned. If a specific branch or tag to be cloned, the specified URL for the branch or tag should be given
+     * @param gitUrl                GitHub URL to clone the product. By default master branch is cloned. If a
+     *                              specific branch or tag to be cloned, the specified URL for the branch or tag
+     *                              should be given
      * @param gitUsername           GitHub user name if the product is in a private repository
      * @param gitPassword           GitHub password if the product is in private repository
-     * @return
      */
     @PostMapping("startScan")
     @ResponseBody
-    public String startScan(@RequestParam String automationManagerHost,
-                            @RequestParam int automationManagerPort,
-                            @RequestParam String myContainerId,
-                            @RequestParam boolean isFileUpload,
-                            @RequestParam(required = false) MultipartFile zipFile,
-                            @RequestParam(required = false) String gitUrl,
-                            @RequestParam(required = false) String gitUsername,
-                            @RequestParam(required = false) String gitPassword) {
-        return findSecBugsScannerService.startScan(automationManagerHost, automationManagerPort, myContainerId, isFileUpload, zipFile, gitUrl, gitUsername, gitPassword);
+    public void startScan(@RequestParam String automationManagerHost,
+                          @RequestParam int automationManagerPort,
+                          @RequestParam String myContainerId,
+                          @RequestParam boolean isFileUpload,
+                          @RequestParam(required = false) MultipartFile zipFile,
+                          @RequestParam(required = false) String gitUrl,
+                          @RequestParam(required = false) String gitUsername,
+                          @RequestParam(required = false) String gitPassword) {
+        try {
+            findSecBugsScannerService.startScan(automationManagerHost, automationManagerPort, myContainerId,
+                    isFileUpload, zipFile, gitUrl, gitUsername, gitPassword);
+        } catch (FindSecBugsScannerException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
      * Controller method to get generated report
-     *
      */
     @RequestMapping(value = "getReport", method = RequestMethod.GET, produces = "application/octet-stream")
     @ResponseBody
