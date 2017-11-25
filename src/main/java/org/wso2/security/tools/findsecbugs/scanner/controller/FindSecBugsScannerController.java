@@ -78,13 +78,9 @@ public class FindSecBugsScannerController {
                           @RequestParam(required = false) MultipartFile zipFile,
                           @RequestParam(required = false) String gitUrl,
                           @RequestParam(required = false) String gitUsername,
-                          @RequestParam(required = false) String gitPassword) {
-        try {
+                          @RequestParam(required = false) String gitPassword) throws FindSecBugsScannerException {
             findSecBugsScannerService.startScan(automationManagerHost, automationManagerPort, myContainerId,
                     isFileUpload, zipFile, gitUrl, gitUsername, gitPassword);
-        } catch (FindSecBugsScannerException e) {
-            e.printStackTrace();
-        }
     }
 
     /**
@@ -92,7 +88,7 @@ public class FindSecBugsScannerController {
      */
     @RequestMapping(value = "getReport", method = RequestMethod.GET, produces = "application/octet-stream")
     @ResponseBody
-    public void getReport(HttpServletResponse response) {
+    public void getReport(HttpServletResponse response) throws FindSecBugsScannerException {
         findSecBugsScannerService.getReport(response);
     }
 }

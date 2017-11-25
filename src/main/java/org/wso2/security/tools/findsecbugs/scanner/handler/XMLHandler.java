@@ -26,7 +26,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 
 /**
- * The class {@code XMLHandler} is to modify a pom.xml file and add the FindSecBugs maven plugin
+ * The class {@code XMLHandler} contains methods to modify a pom.xml file and add the FindSecBugs maven plugin
  */
 public class XMLHandler {
 
@@ -64,11 +64,12 @@ public class XMLHandler {
     private static final String CATEGORY_ATTRIBUTE_VALUE = "SECURITY";
 
     /**
-     * Iterate through a pom.xml file and find a node
+     * Iterate through a pom.xml file and find the {@code <build>} node. Then append {@code FindBugs} plugin included
+     * with {@code FindSecBugs} plugin
      *
      * @param node     Node to iterate and find
      * @param document XML document
-     * @return
+     * @return XML document
      * @throws TransformerException
      */
     public static Document appendFindBugsPlugin(Node node, Document document) throws TransformerException {

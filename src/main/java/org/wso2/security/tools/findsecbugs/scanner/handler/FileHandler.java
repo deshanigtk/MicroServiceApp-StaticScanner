@@ -18,8 +18,6 @@
 package org.wso2.security.tools.findsecbugs.scanner.handler;
 
 import org.codehaus.plexus.util.FileUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.web.multipart.MultipartFile;
 import org.wso2.security.tools.findsecbugs.scanner.Constants;
 
@@ -34,8 +32,8 @@ import java.util.zip.ZipOutputStream;
 /**
  * Utility methods for file handling
  */
+@SuppressWarnings({"unused"})
 public class FileHandler {
-    private final static Logger LOGGER = LoggerFactory.getLogger(FileHandler.class);
 
     /**
      * Traverse and find files with a specific name, rename them and move to a new folder.
@@ -84,10 +82,12 @@ public class FileHandler {
         }
         if (fileToZip.isDirectory()) {
             File[] children = fileToZip.listFiles();
-            for (File childFile : children) {
-                zipFolder(childFile, fileToZipName + File.separator + childFile.getName(), destinationZipFilePath);
+            if (children != null) {
+                for (File childFile : children) {
+                    zipFolder(childFile, fileToZipName + File.separator + childFile.getName(), destinationZipFilePath);
+                }
+                return;
             }
-            return;
         }
         FileInputStream fis = new FileInputStream(fileToZip);
         ZipEntry zipEntry = new ZipEntry(fileToZipName);

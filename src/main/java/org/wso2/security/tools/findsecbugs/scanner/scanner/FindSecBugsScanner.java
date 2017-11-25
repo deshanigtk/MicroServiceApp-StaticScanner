@@ -23,6 +23,7 @@ import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.wso2.security.tools.findsecbugs.scanner.Constants;
 import org.wso2.security.tools.findsecbugs.scanner.NotificationManager;
+import org.wso2.security.tools.findsecbugs.scanner.exception.NotificationManagerException;
 import org.wso2.security.tools.findsecbugs.scanner.handler.FileHandler;
 import org.wso2.security.tools.findsecbugs.scanner.handler.MavenHandler;
 import org.wso2.security.tools.findsecbugs.scanner.handler.XMLHandler;
@@ -39,27 +40,38 @@ import javax.xml.transform.stream.StreamResult;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * The class {@code FindSecBugsScanner} contains methods to run {@code FindSecBugs} scan and generate report
+ */
 public class FindSecBugsScanner {
     //FindSecBugs related
     private static final String FIND_BUGS_REPORT = "findbugsXml.xml";
     private static final String FINDBUGS_SECURITY_INCLUDE = "findbugs-security-include.xml";
     private static final String FINDBUGS_SECURITY_EXCLUDE = "findbugs-security-exclude.xml";
-
     //Maven Commands
     private static final String MVN_COMMAND_FIND_SEC_BUGS = "findbugs:findbugs";
     private static final String MVN_COMMAND_COMPILE = "compile";
 
     private static final Logger LOGGER = LoggerFactory.getLogger(FindSecBugsScanner.class);
 
-    public void startScan() throws MavenInvocationException, TransformerException, ParserConfigurationException,
-            IOException, SAXException {
+    /**
+     * The main contract of this method is to run the {@code FindSecBugs} scanning process
+     * <p>Modifies the pom.xml file and add {@code FindBugs} plugin. Then build the product source code. Finally
+     * find the generated reports, rename and move to a new folder</p>
+     * @throws MavenInvocationException
+     * @throws TransformerException
+     * @throws ParserConfigurationException
+     * @throws IOException
+     * @throws SAXException
+     */
+    public void runScan() throws MavenInvocationException, TransformerException, ParserConfigurationException,
+            IOException, SAXException, NotificationManagerException {
 
-        File reportsFolder=new File(Constants.REPORTS_FOLDER_PATH);
+        File reportsFolder = new File(Constants.REPORTS_FOLDER_PATH);
         LOGGER.info("FindSecBugs started");
         NotificationManager.notifyScanStatus("running");
         TransformerFactory transformerFactory = TransformerFactory.newInstance();
         Transformer transformer = transformerFactory.newTransformer();
-
         createAndWriteToFindSecBugsIncludeFile(transformer);
         createAndWriteToFindSecBugsExcludeFile(transformer);
         appendFindSecBugsPlugin(transformer);
@@ -80,35 +92,39 @@ public class FindSecBugsScanner {
 
     private void createAndWriteToFindSecBugsIncludeFile(Transformer transformer) throws
             ParserConfigurationException, TransformerException {
-        File findBugsSecIncludeFile = new File(FindSecBugsScannerExecutor.getProductPath() + File.separator +
+        LOGGER.trace("Creating and writing to findbugs-security-include.xml file");
+        File findSecBugsIncludeFile = new File(FindSecBugsScannerExecutor.getProductPath() + File.separator +
                 FINDBUGS_SECURITY_INCLUDE);
         DocumentBuilder dBuilder;
         dBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
         assert dBuilder != null;
-        Document findBugsSecIncludeDocument = dBuilder.newDocument();
-        XMLHandler.writeFindSecBugsIncludeFile(findBugsSecIncludeDocument);
-        DOMSource findBugsSecIncludeSource = new DOMSource(findBugsSecIncludeDocument);
-        StreamResult findBugsSecurityIncludeResult = new StreamResult(findBugsSecIncludeFile);
-        transformer.transform(findBugsSecIncludeSource, findBugsSecurityIncludeResult);
+        Document findSecBugsIncludeDocument = dBuilder.newDocument();
+        XMLHandler.writeFindSecBugsIncludeFile(findSecBugsIncludeDocument);
+        DOMSource findSecBugsIncludeSource = new DOMSource(findSecBugsIncludeDocument);
+        StreamResult findSecBugsIncludeResult = new StreamResult(findSecBugsIncludeFile);
+        transformer.transform(findSecBugsIncludeSource, findSecBugsIncludeResult);
     }
 
     private void createAndWriteToFindSecBugsExcludeFile(Transformer transformer) throws
             ParserConfigurationException, TransformerException {
-        File findBugsSecExcludeFile = new File(FindSecBugsScannerExecutor.getProductPath() + File.separator +
+        LOGGER.trace("Creating and writing to findbugs-security-exclude.xml file");
+        File findSecBugsExcludeFile = new File(FindSecBugsScannerExecutor.getProductPath() + File.separator +
                 FINDBUGS_SECURITY_EXCLUDE);
         DocumentBuilder dBuilder;
         dBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
         assert dBuilder != null;
-        Document findBugsSecExcludeDocument = dBuilder.newDocument();
-        XMLHandler.writeFindSecBugsExcludeFile(findBugsSecExcludeDocument);
-        DOMSource findBugsSecExcludeSource = new DOMSource(findBugsSecExcludeDocument);
-        StreamResult findBugsSecurityExcludeResult = new StreamResult(findBugsSecExcludeFile);
-        transformer.transform(findBugsSecExcludeSource, findBugsSecurityExcludeResult);
+        Document findSecBugsExcludeDocument = dBuilder.newDocument();
+        XMLHandler.writeFindSecBugsExcludeFile(findSecBugsExcludeDocument);
+        DOMSource findSecBugsExcludeSource = new DOMSource(findSecBugsExcludeDocument);
+        StreamResult findSecBugsExcludeResult = new StreamResult(findSecBugsExcludeFile);
+        transformer.transform(findSecBugsExcludeSource, findSecBugsExcludeResult);
     }
 
     private void appendFindSecBugsPlugin(Transformer transformer) throws ParserConfigurationException,
             IOException, SAXException, TransformerException {
-        File productPomFile = new File(FindSecBugsScannerExecutor.getProductPath() + File.separator + Constants.POM_FILE);
+        LOGGER.trace("appending findsecbugs plugin to pom.xml file");
+        File productPomFile = new File(FindSecBugsScannerExecutor.getProductPath() + File.separator + Constants
+                .POM_FILE);
         DocumentBuilder dBuilder;
         dBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
         Document findBugsPluginDocument;
@@ -117,7 +133,8 @@ public class FindSecBugsScanner {
                 findBugsPluginDocument);
 
         DOMSource findBugsPluginSource = new DOMSource(findBugsPluginDocument);
-        StreamResult result = new StreamResult(FindSecBugsScannerExecutor.getProductPath() + File.separator + Constants.POM_FILE);
+        StreamResult result = new StreamResult(FindSecBugsScannerExecutor.getProductPath() + File.separator +
+                Constants.POM_FILE);
         transformer.transform(findBugsPluginSource, result);
     }
 }

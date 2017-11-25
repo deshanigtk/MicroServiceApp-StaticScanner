@@ -24,6 +24,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.wso2.security.tools.findsecbugs.scanner.Constants;
 import org.wso2.security.tools.findsecbugs.scanner.NotificationManager;
+import org.wso2.security.tools.findsecbugs.scanner.exception.FindSecBugsScannerException;
+import org.wso2.security.tools.findsecbugs.scanner.exception.NotificationManagerException;
 import org.wso2.security.tools.findsecbugs.scanner.handler.FileHandler;
 import org.wso2.security.tools.findsecbugs.scanner.handler.GitHandler;
 import org.xml.sax.SAXException;
@@ -34,6 +36,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Observable;
 
+/**
+ * The class {@code FindSecBugsScannerExecutor} extends {@link Observable} and implements {@link Runnable}
+ * <p>This class is to handle the product and do the scanning process asynchronously</p>
+ */
 public class FindSecBugsScannerExecutor extends Observable implements Runnable {
 
     private static String productPath = Constants.DEFAULT_PRODUCT_PATH;
@@ -54,22 +60,46 @@ public class FindSecBugsScannerExecutor extends Observable implements Runnable {
         this.gitPassword = gitPassword;
     }
 
+    /**
+     * Returns the product path (where the product is in)
+     *
+     * @return Product path
+     */
     public static String getProductPath() {
         return productPath;
     }
 
+    /**
+     * This method is to set the product path, if the default product path is changed
+     * <p>If a file is extracted, a new folder is created. When invoking maven commands, the product path should be
+     * defined</p>
+     *
+     * @param productPath Product path
+     */
     private static void setProductPath(String productPath) {
         FindSecBugsScannerExecutor.productPath = productPath;
     }
 
+    /**
+     * Overrides the {@code run} method to start the scan.
+     * <p>If a zip file is uploaded, then it is extracted. If a GitURL is given, the product is cloned. After
+     * product is available from one of the above method, modifies the pom.xml file of the product to add {@code
+     * FindBugs} plugin included with {@code FindSecBugs} plugin. Then the product source is built. After report is
+     * generated, notify observers</p>
+     */
     @Override
     public void run() {
-        startScan();
+        try {
+            startScan();
+        } catch (FindSecBugsScannerException | NotificationManagerException e) {
+            LOGGER.error(e.toString());
+            e.printStackTrace();
+        }
         setChanged();
         notifyObservers(true);
     }
 
-    private void startScan() {
+    private void startScan() throws FindSecBugsScannerException, NotificationManagerException {
         boolean isProductAvailable = false;
         if (isFileUpload) {
             String folderName;
@@ -78,9 +108,11 @@ public class FindSecBugsScannerExecutor extends Observable implements Runnable {
                         zipFileName);
                 FindSecBugsScannerExecutor.setProductPath(Constants.DEFAULT_PRODUCT_PATH + File.separator + folderName);
                 isProductAvailable = true;
+                LOGGER.info("File successfully extracted");
                 NotificationManager.notifyFileExtracted(true);
             } catch (IOException e) {
                 NotificationManager.notifyFileExtracted(false);
+                throw new FindSecBugsScannerException("Error occurred while extracting zip file", e);
             }
         } else {
             File productFile = new File(Constants.DEFAULT_PRODUCT_PATH);
@@ -89,20 +121,24 @@ public class FindSecBugsScannerExecutor extends Observable implements Runnable {
                 try {
                     git = GitHandler.gitClone(gitUrl, gitUsername, gitPassword, Constants.DEFAULT_PRODUCT_PATH);
                     isProductAvailable = GitHandler.hasAtLeastOneReference(git.getRepository());
+                    LOGGER.info("File successfully cloned");
                     NotificationManager.notifyProductCloned(true);
-                } catch (GitAPIException e1) {
+                } catch (GitAPIException e) {
                     NotificationManager.notifyProductCloned(false);
+                    throw new FindSecBugsScannerException("Error occurred while cloning product", e);
                 }
             }
         }
         if (isProductAvailable) {
             FindSecBugsScanner findSecBugsScanner = new FindSecBugsScanner();
             try {
-                findSecBugsScanner.startScan();
+                findSecBugsScanner.runScan();
+                LOGGER.info("FindSecBugs scan completed");
                 NotificationManager.notifyScanStatus("completed");
             } catch (MavenInvocationException | TransformerException | IOException | ParserConfigurationException |
                     SAXException e) {
                 NotificationManager.notifyScanStatus("failed");
+                throw new FindSecBugsScannerException("Error occurred while running the scan", e);
             }
         }
     }

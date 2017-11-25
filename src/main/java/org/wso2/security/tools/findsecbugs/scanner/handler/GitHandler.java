@@ -24,8 +24,6 @@ import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.lib.TextProgressMonitor;
 import org.eclipse.jgit.transport.UsernamePasswordCredentialsProvider;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
@@ -38,7 +36,6 @@ import java.io.PrintWriter;
  */
 @SuppressWarnings({"unused"})
 public class GitHandler {
-    private static final Logger LOGGER = LoggerFactory.getLogger(GitHandler.class);
 
     /**
      * Clone from GitHub and returns a {@link Git} object. If the URL is related to a private

@@ -24,16 +24,17 @@ package org.wso2.security.tools.findsecbugs.scanner.exception;
  *
  * @see Exception
  */
+@SuppressWarnings({"unused"})
 public class FindSecBugsScannerException extends Exception {
     /**
-     * Constructs a new runtime exception with {@code null} as its detail message.
+     * Constructs a new exception with {@code null} as its detail message.
      */
     public FindSecBugsScannerException() {
         super();
     }
 
     /**
-     * Constructs a new runtime exception with the specified detail message.
+     * Constructs a new exception with the specified detail message.
      *
      * @param message Message for the exception
      */
@@ -42,7 +43,7 @@ public class FindSecBugsScannerException extends Exception {
     }
 
     /**
-     * Constructs a new runtime exception with the specified detail message and cause.
+     * Constructs a new exception with the specified detail message and cause.
      */
     public FindSecBugsScannerException(String message, Throwable e) {
         super(message, e);

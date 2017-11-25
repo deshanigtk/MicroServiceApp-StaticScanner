@@ -27,6 +27,7 @@ import java.util.OptionalInt;
 /**
  * Utility methods for handling Maven
  */
+@SuppressWarnings({"unused"})
 public class MavenHandler {
     private static final String MVN_COMMAND_M2_HOME = "M2_HOME";
 
