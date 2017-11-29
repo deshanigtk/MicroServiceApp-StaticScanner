@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="40f81c15-5b53-4a0c-b769-503e6b234624" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/Constants.java" afterPath="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/Constants.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -32,7 +33,7 @@
       <file leaf-file-name="FindSecBugsScannerService.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/service/FindSecBugsScannerService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="810">
+            <state relative-caret-position="-1480">
               <caret line="45" column="13" lean-forward="false" selection-start-line="45" selection-start-column="13" selection-end-line="45" selection-end-column="13" />
               <folding>
                 <element signature="e#0#7863#0" expanded="true" />
@@ -45,7 +46,7 @@
       <file leaf-file-name="NotificationManager.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/NotificationManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
+            <state relative-caret-position="-1588">
               <caret line="37" column="13" lean-forward="false" selection-start-line="37" selection-start-column="13" selection-end-line="37" selection-end-column="13" />
               <folding>
                 <element signature="e#0#6860#0" expanded="true" />
@@ -54,7 +55,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FindSecBugsScannerExecutor.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="FindSecBugsScannerExecutor.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/scanner/FindSecBugsScannerExecutor.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="630">
@@ -66,25 +67,25 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Constants.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Constants.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/Constants.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="558">
-              <caret line="31" column="48" lean-forward="false" selection-start-line="31" selection-start-column="48" selection-end-line="31" selection-end-column="48" />
+            <state relative-caret-position="486">
+              <caret line="27" column="52" lean-forward="false" selection-start-line="27" selection-start-column="52" selection-end-line="27" selection-end-column="52" />
               <folding>
-                <element signature="e#0#1257#0" expanded="true" />
+                <element signature="e#0#1256#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GitHandler.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/handler/GitHandler.java">
+      <file leaf-file-name="App.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/App.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1746">
-              <caret line="107" column="5" lean-forward="false" selection-start-line="107" selection-start-column="5" selection-end-line="107" selection-end-column="5" />
+            <state relative-caret-position="414">
+              <caret line="24" column="13" lean-forward="false" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
               <folding>
-                <element signature="e#0#4266#0" expanded="true" />
+                <element signature="e#0#1000#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -221,11 +222,11 @@
         <option value="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/App.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/NotificationManager.java" />
         <option value="$PROJECT_DIR$/src/test/java/org/wso2/security/tools/findsecbugs/scanner/FindSecBugsScannerServiceTest.java" />
-        <option value="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/Constants.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/scanner/FindSecBugsScannerExecutor.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/scanner/FindSecBugsScanner.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/handler/GitHandler.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/exception/NotificationManagerException.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/Constants.java" />
       </list>
     </option>
   </component>
@@ -938,7 +939,7 @@
       <workItem from="1511886355134" duration="31000" />
       <workItem from="1511965175372" duration="1954000" />
       <workItem from="1511970648803" duration="379000" />
-      <workItem from="1511971118961" duration="8000" />
+      <workItem from="1511971118961" duration="46000" />
     </task>
     <task id="LOCAL-00001" summary="removing git comment">
       <created>1501778924100</created>
@@ -1255,7 +1256,14 @@
       <option name="project" value="LOCAL" />
       <updated>1511970227759</updated>
     </task>
-    <option name="localTasksCounter" value="46" />
+    <task id="LOCAL-00046" summary="removind tests">
+      <created>1511971135899</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1511971135899</updated>
+    </task>
+    <option name="localTasksCounter" value="47" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1291,7 +1299,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="338796000" />
+    <option name="totallyTimeSpent" value="338834000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1304,6 +1312,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="65" y="-4" width="1855" height="1084" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="FindBugs-IDEA" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32985386" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1326,7 +1335,7 @@
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="CheckStyle" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28172043" sideWeight="0.49811321" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27197346" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27197346" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32946378" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -1380,7 +1389,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="add method to change product path" />
     <MESSAGE value="changes to extract folder and set product path" />
     <MESSAGE value="few" />
     <MESSAGE value="add packages and implements observer, threads" />
@@ -1405,7 +1413,8 @@
     <MESSAGE value="Added private methods and clean the code" />
     <MESSAGE value="Added NotificationManagerException and handle all the exceptions.&#10;Write logs" />
     <MESSAGE value="Reformatted the code" />
-    <option name="LAST_COMMIT_MESSAGE" value="Reformatted the code" />
+    <MESSAGE value="removind tests" />
+    <option name="LAST_COMMIT_MESSAGE" value="removind tests" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1598,16 +1607,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/org/wso2/security/tools/findsecbugs/scanner/FindSecBugsScannerServiceTest.java" />
     <entry file="file://$PROJECT_DIR$/src/test/java/org/wso2/security/tools/findsecbugs/scanner/FileHandlerTest.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/App.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="24" column="13" lean-forward="false" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
-          <folding>
-            <element signature="e#0#1000#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/scanner/FindSecBugsScanner.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1764">
@@ -1688,19 +1687,39 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/scanner/FindSecBugsScannerExecutor.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/Constants.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
-          <caret line="52" column="0" lean-forward="false" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
+        <state relative-caret-position="486">
+          <caret line="27" column="52" lean-forward="false" selection-start-line="27" selection-start-column="52" selection-end-line="27" selection-end-column="52" />
           <folding>
-            <element signature="e#0#6131#0" expanded="true" />
+            <element signature="e#0#1256#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/NotificationManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1588">
+          <caret line="37" column="13" lean-forward="false" selection-start-line="37" selection-start-column="13" selection-end-line="37" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#6860#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/App.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="414">
+          <caret line="24" column="13" lean-forward="false" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#1000#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/service/FindSecBugsScannerService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="810">
+        <state relative-caret-position="-1480">
           <caret line="45" column="13" lean-forward="false" selection-start-line="45" selection-start-column="13" selection-end-line="45" selection-end-column="13" />
           <folding>
             <element signature="e#0#7863#0" expanded="true" />
@@ -1709,22 +1728,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/NotificationManager.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/scanner/FindSecBugsScannerExecutor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="37" column="13" lean-forward="false" selection-start-line="37" selection-start-column="13" selection-end-line="37" selection-end-column="13" />
+        <state relative-caret-position="630">
+          <caret line="52" column="0" lean-forward="false" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
           <folding>
-            <element signature="e#0#6860#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/wso2/security/tools/findsecbugs/scanner/Constants.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="558">
-          <caret line="31" column="48" lean-forward="false" selection-start-line="31" selection-start-column="48" selection-end-line="31" selection-end-column="48" />
-          <folding>
-            <element signature="e#0#1257#0" expanded="true" />
+            <element signature="e#0#6131#0" expanded="true" />
           </folding>
         </state>
       </provider>

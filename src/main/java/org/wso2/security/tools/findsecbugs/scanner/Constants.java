@@ -26,7 +26,6 @@ public final class Constants {
     //Files
     public static final String ZIP_FILE_EXTENSION = ".zip";
     public static final String POM_FILE = "pom.xml";
-
     //Symbols
     public static final String UNDERSCORE = "_";
     public static final String NULL_STRING = "";
