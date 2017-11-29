@@ -1,5 +1,5 @@
 /*
-*  Copyright (c) ${date}, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+*  Copyright (c) 2017, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
 *
 *  WSO2 Inc. licenses this file to you under the Apache License,
 *  Version 2.0 (the "License"); you may not use this file except
@@ -15,6 +15,7 @@
 * specific language governing permissions and limitations
 * under the License.
 */
+
 package org.wso2.security.tools.findsecbugs.scanner.handler;
 
 import org.apache.maven.shared.invoker.*;
@@ -22,7 +23,6 @@ import org.wso2.security.tools.findsecbugs.scanner.scanner.FindSecBugsScannerExe
 
 import java.io.File;
 import java.util.Collections;
-import java.util.OptionalInt;
 
 /**
  * Utility methods for handling Maven
@@ -37,7 +37,7 @@ public class MavenHandler {
      * @param pomFilePath  pom.xml file path
      * @param mavenCommand Maven command to execute
      * @throws MavenInvocationException Signals an error during the construction of the command line used to invoke
-     * Maven
+     *                                  Maven
      */
     public static void runMavenCommand(String pomFilePath, String mavenCommand) throws MavenInvocationException {
         InvocationRequest request = new DefaultInvocationRequest();
@@ -46,7 +46,6 @@ public class MavenHandler {
         request.setGoals(Collections.singletonList(mavenCommand));
         Invoker invoker = new DefaultInvoker();
         invoker.setMavenHome(new File(System.getenv(MVN_COMMAND_M2_HOME)));
-        InvocationResult result = invoker.execute(request);
-        OptionalInt.of(result.getExitCode());
+        invoker.execute(request);
     }
 }

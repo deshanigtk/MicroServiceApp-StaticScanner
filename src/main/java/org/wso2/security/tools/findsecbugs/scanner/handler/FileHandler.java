@@ -1,5 +1,5 @@
 /*
-*  Copyright (c) ${date}, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+*  Copyright (c) 2017, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
 *
 *  WSO2 Inc. licenses this file to you under the Apache License,
 *  Version 2.0 (the "License"); you may not use this file except
@@ -15,6 +15,7 @@
 * specific language governing permissions and limitations
 * under the License.
 */
+
 package org.wso2.security.tools.findsecbugs.scanner.handler;
 
 import org.codehaus.plexus.util.FileUtils;
@@ -50,9 +51,8 @@ public class FileHandler {
             throws IOException {
         File dir = new File(destinationPath);
         if (dir.mkdir()) {
-            Files.find(Paths.get(sourcePath), Integer.MAX_VALUE,
-                    (filePath, fileAttr) -> filePath.getFileName().toString().equals(fileName)).forEach((f) -> {
-
+            Files.find(Paths.get(sourcePath), Integer.MAX_VALUE, (filePath, fileAttr) -> filePath.getFileName()
+                    .toString().equals(fileName)).forEach((f) -> {
                 File file = f.toFile();
                 String newFileName = file.getAbsolutePath().replace(sourcePath, Constants.NULL_STRING).replace(File
                         .separator, Constants.UNDERSCORE);
@@ -118,7 +118,6 @@ public class FileHandler {
         String newPath = file.getParent();
         String fileName = file.getName();
         Enumeration zipFileEntries = zip.entries();
-
         while (zipFileEntries.hasMoreElements()) {
             // grab a zip file entry
             ZipEntry entry = (ZipEntry) zipFileEntries.nextElement();
@@ -127,7 +126,6 @@ public class FileHandler {
             File destinationParent = destFile.getParentFile();
             // create the parent directory structure if needed
             destinationParent.mkdirs();
-
             if (!entry.isDirectory()) {
                 BufferedInputStream is = new BufferedInputStream(zip.getInputStream(entry));
                 int currentByte;

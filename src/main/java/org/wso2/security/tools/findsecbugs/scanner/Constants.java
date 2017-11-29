@@ -1,5 +1,5 @@
 /*
-*  Copyright (c) ${date}, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+*  Copyright (c) 2017, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
 *
 *  WSO2 Inc. licenses this file to you under the Apache License,
 *  Version 2.0 (the "License"); you may not use this file except
@@ -15,8 +15,12 @@
 * specific language governing permissions and limitations
 * under the License.
 */
+
 package org.wso2.security.tools.findsecbugs.scanner;
 
+/**
+ * Constants of the application
+ */
 public final class Constants {
     public static final String FIND_SEC_BUGS_REPORTS_FOLDER = "Find-Sec-Bugs-Reports";
     //Files
@@ -27,7 +31,7 @@ public final class Constants {
     public static final String UNDERSCORE = "_";
     public static final String NULL_STRING = "";
 
-    public static final String DEFAULT_PRODUCT_PATH = "/home/deshani/Documents/Product";
-    public static final String REPORTS_FOLDER_PATH = "/home/deshani/Documents/Reports";
+    public static final String DEFAULT_PRODUCT_PATH = "/home/Product";
+    public static final String REPORTS_FOLDER_PATH = "/home/Reports";
 
 }

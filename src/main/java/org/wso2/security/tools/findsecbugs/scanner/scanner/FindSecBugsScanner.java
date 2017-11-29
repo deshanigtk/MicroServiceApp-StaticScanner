@@ -1,5 +1,5 @@
 /*
-*  Copyright (c) ${date}, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+*  Copyright (c) 2017, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
 *
 *  WSO2 Inc. licenses this file to you under the Apache License,
 *  Version 2.0 (the "License"); you may not use this file except
@@ -15,6 +15,7 @@
 * specific language governing permissions and limitations
 * under the License.
 */
+
 package org.wso2.security.tools.findsecbugs.scanner.scanner;
 
 import org.apache.maven.shared.invoker.MavenInvocationException;
@@ -58,6 +59,7 @@ public class FindSecBugsScanner {
      * The main contract of this method is to run the {@code FindSecBugs} scanning process
      * <p>Modifies the pom.xml file and add {@code FindBugs} plugin. Then build the product source code. Finally
      * find the generated reports, rename and move to a new folder</p>
+     *
      * @throws MavenInvocationException
      * @throws TransformerException
      * @throws ParserConfigurationException
@@ -80,14 +82,17 @@ public class FindSecBugsScanner {
                 MVN_COMMAND_COMPILE);
         MavenHandler.runMavenCommand(FindSecBugsScannerExecutor.getProductPath() + File.separator + Constants.POM_FILE,
                 MVN_COMMAND_FIND_SEC_BUGS);
-
+        LOGGER.info("FindSecBugs scan completed");
+        NotificationManager.notifyScanStatus("completed");
         if (reportsFolder.exists() || reportsFolder.mkdir()) {
             String reportsFolderPath = Constants.REPORTS_FOLDER_PATH + File.separator + Constants
                     .FIND_SEC_BUGS_REPORTS_FOLDER;
             FileHandler.findFilesRenameAndMoveToFolder(FindSecBugsScannerExecutor.getProductPath(), reportsFolderPath,
                     FIND_BUGS_REPORT);
+            File fileToZip = new File(Constants.REPORTS_FOLDER_PATH);
+            String destinationZipFilePath = Constants.REPORTS_FOLDER_PATH + Constants.ZIP_FILE_EXTENSION;
+            FileHandler.zipFolder(fileToZip, fileToZip.getName(), destinationZipFilePath);
         }
-
     }
 
     private void createAndWriteToFindSecBugsIncludeFile(Transformer transformer) throws

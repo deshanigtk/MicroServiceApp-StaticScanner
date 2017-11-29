@@ -1,5 +1,5 @@
 /*
-*  Copyright (c) ${date}, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+*  Copyright (c) 2017, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
 *
 *  WSO2 Inc. licenses this file to you under the Apache License,
 *  Version 2.0 (the "License"); you may not use this file except
@@ -15,6 +15,7 @@
 * specific language governing permissions and limitations
 * under the License.
 */
+
 package org.wso2.security.tools.findsecbugs.scanner.scanner;
 
 import org.apache.maven.shared.invoker.MavenInvocationException;
@@ -133,8 +134,7 @@ public class FindSecBugsScannerExecutor extends Observable implements Runnable {
             FindSecBugsScanner findSecBugsScanner = new FindSecBugsScanner();
             try {
                 findSecBugsScanner.runScan();
-                LOGGER.info("FindSecBugs scan completed");
-                NotificationManager.notifyScanStatus("completed");
+
             } catch (MavenInvocationException | TransformerException | IOException | ParserConfigurationException |
                     SAXException e) {
                 NotificationManager.notifyScanStatus("failed");

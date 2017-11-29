@@ -1,5 +1,5 @@
 /*
-*  Copyright (c) ${date}, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+*  Copyright (c) 2017, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
 *
 *  WSO2 Inc. licenses this file to you under the Apache License,
 *  Version 2.0 (the "License"); you may not use this file except
@@ -15,6 +15,7 @@
 * specific language governing permissions and limitations
 * under the License.
 */
+
 package org.wso2.security.tools.findsecbugs.scanner.service;
 
 import org.apache.tomcat.util.http.fileupload.IOUtils;
@@ -136,15 +137,8 @@ public class FindSecBugsScannerService {
     private Observer observe() {
         return (o, arg) -> {
             try {
-                if (new File(Constants.REPORTS_FOLDER_PATH + File.separator + Constants.FIND_SEC_BUGS_REPORTS_FOLDER)
-                        .exists()) {
-                    File fileToZip = new File(Constants.REPORTS_FOLDER_PATH);
-                    String destinationZipFilePath = Constants.REPORTS_FOLDER_PATH + Constants.ZIP_FILE_EXTENSION;
-                    try {
-                        FileHandler.zipFolder(fileToZip, fileToZip.getName(), destinationZipFilePath);
-                    } catch (IOException e) {
-                        NotificationManager.notifyReportReady(false);
-                    }
+                if (new File(Constants.REPORTS_FOLDER_PATH + File.separator + Constants
+                        .FIND_SEC_BUGS_REPORTS_FOLDER + Constants.ZIP_FILE_EXTENSION).exists()) {
                     NotificationManager.notifyReportReady(true);
                 } else {
                     NotificationManager.notifyReportReady(false);
@@ -157,6 +151,7 @@ public class FindSecBugsScannerService {
 
     /**
      * Get the generated report
+     *
      * @param response HttpServletResponse
      * @throws FindSecBugsScannerException
      */

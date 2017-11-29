@@ -1,5 +1,5 @@
 /*
-*  Copyright (c) ${date}, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+*  Copyright (c) 2017, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
 *
 *  WSO2 Inc. licenses this file to you under the Apache License,
 *  Version 2.0 (the "License"); you may not use this file except
@@ -15,6 +15,7 @@
 * specific language governing permissions and limitations
 * under the License.
 */
+
 package org.wso2.security.tools.findsecbugs.scanner.handler;
 
 import org.w3c.dom.Document;
@@ -96,49 +97,49 @@ public class XMLHandler {
     private static void createFindBugsPluginNode(Document document, Element rootElement) throws TransformerException {
         //Get the <plugins> element that available under <build> element
         Element pluginsElement = (Element) rootElement.getElementsByTagName(PLUGINS_ELEMENT).item(0);
-
         //Create new element <plugin>
         Element pluginElement = document.createElement(PLUGIN_ELEMENT);
-
+        //Create <groupId> element and add text
         Element groupIdElement = document.createElement(GROUP_ID_ELEMENT);
         groupIdElement.appendChild(document.createTextNode(GROUP_ID_TEXT));
-
+        //Create <artifactId> element and add text
         Element artifactIdElement = document.createElement(ARTIFACT_ID_ELEMENT);
         artifactIdElement.appendChild(document.createTextNode(ARTIFACT_ID_TEXT));
-
+        //Create <version> element and add text
         Element versionElement = document.createElement(VERSION_ELEMENT);
         versionElement.appendChild(document.createTextNode(VERSION_TEXT));
-
+        //Create <configuration> element
         Element configurationElement = createConfigurationNode(document);
+        //Create findSecBugs <plugin> element and append to <configuration> element
         Element findSecBugsPlugin = createFindSecBugsPlugin(document);
         configurationElement.appendChild(findSecBugsPlugin);
-
+        //Append child elements to <plugin> element
         pluginElement.appendChild(groupIdElement);
         pluginElement.appendChild(artifactIdElement);
         pluginElement.appendChild(versionElement);
         pluginElement.appendChild(configurationElement);
-
+        //Append child elements to <plugins> element
         pluginsElement.appendChild(pluginElement);
     }
 
     private static Element createConfigurationNode(Document document) {
-        //Create <configuration></configuration>
+        //Create <configuration> element
         Element configurationElement = document.createElement(CONFIGURATION_ELEMENT);
         Element effortElement = document.createElement(EFFORT_ELEMENT);
         effortElement.appendChild(document.createTextNode(EFFORT_TEXT));
-
+        //Create <threshold> element and set text
         Element thresholdElement = document.createElement(THRESHOLD_ELEMENT);
         thresholdElement.appendChild(document.createTextNode(THRESHOLD_TEXT));
-
+        //Create <failOnError> element and set text
         Element failOnErrorElement = document.createElement(FAIL_ON_ERROR_ELEMENT);
         failOnErrorElement.appendChild(document.createTextNode(FAIL_ON_ERROR_TEXT));
-
+        //Create <includeFilterFile> element and add text
         Element includeFilterFileElement = document.createElement(INCLUDE_FILTER_FILE_ELEMENT);
         includeFilterFileElement.appendChild(document.createTextNode(INCLUDE_FILTER_FILE_TEXT));
-
+        //Create <excludeFilterFile> element and add text
         Element excludeFilterFileElement = document.createElement(EXCLUDE_FILTER_FILE_ELEMENT);
         excludeFilterFileElement.appendChild(document.createTextNode(EXCLUDE_FILTER_FILE_TEXT));
-
+        //Add child nodes to <configuration> element
         configurationElement.appendChild(effortElement);
         configurationElement.appendChild(thresholdElement);
         configurationElement.appendChild(failOnErrorElement);
