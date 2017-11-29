@@ -51,7 +51,6 @@ public class FindSecBugsScannerExecutor extends Observable implements Runnable {
     private String gitUsername;
     private String gitPassword;
 
-
     public FindSecBugsScannerExecutor(boolean isFileUpload, String zipFileName, String gitUrl, String gitUsername,
                                       String gitPassword) {
         this.isFileUpload = isFileUpload;

@@ -52,7 +52,6 @@ public class FindSecBugsScanner {
     //Maven Commands
     private static final String MVN_COMMAND_FIND_SEC_BUGS = "findbugs:findbugs";
     private static final String MVN_COMMAND_COMPILE = "compile";
-
     private static final Logger LOGGER = LoggerFactory.getLogger(FindSecBugsScanner.class);
 
     /**
@@ -68,7 +67,6 @@ public class FindSecBugsScanner {
      */
     public void runScan() throws MavenInvocationException, TransformerException, ParserConfigurationException,
             IOException, SAXException, NotificationManagerException {
-
         File reportsFolder = new File(Constants.REPORTS_FOLDER_PATH);
         LOGGER.info("FindSecBugs started");
         NotificationManager.notifyScanStatus("running");
@@ -136,7 +134,6 @@ public class FindSecBugsScanner {
         findBugsPluginDocument = dBuilder.parse(productPomFile);
         findBugsPluginDocument = XMLHandler.appendFindBugsPlugin(findBugsPluginDocument.getDocumentElement(),
                 findBugsPluginDocument);
-
         DOMSource findBugsPluginSource = new DOMSource(findBugsPluginDocument);
         StreamResult result = new StreamResult(FindSecBugsScannerExecutor.getProductPath() + File.separator +
                 Constants.POM_FILE);

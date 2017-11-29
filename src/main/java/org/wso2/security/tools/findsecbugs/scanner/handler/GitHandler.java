@@ -62,7 +62,6 @@ public class GitHandler {
                 .setURI(gitURL)
                 .setDirectory(new File(filePath))
                 .setBranch(branch);
-
         if (username != null && password != null) {
             cloneCommand.setCredentialsProvider(new UsernamePasswordCredentialsProvider(username, password));
         }
@@ -107,5 +106,4 @@ public class GitHandler {
     public static Git gitOpen(String productPath) throws IOException {
         return Git.open(new File(productPath));
     }
-
 }
